@@ -64,7 +64,6 @@ public class Card {
     return Objects.hash(rank, suit);
   }
 
-  @Override
   public String toString() {
     return rank + " of " + suit;
   }

@@ -56,7 +56,7 @@ public class CardTest {
     assertAllRanksOfGivenSuitArePresent(stackOfCards, HEARTS);
   }
 
-  private static void assertAllRanksOfGivenSuitArePresent(Stack<Card> stackOfCards, Suit suit) {
+  static void assertAllRanksOfGivenSuitArePresent(Stack<Card> stackOfCards, Suit suit) {
     assertTrue(stackOfCards.search(new Card(ACE, suit)) > -1);
     assertTrue(stackOfCards.search(new Card(TWO, suit)) > -1);
     assertTrue(stackOfCards.search(new Card(THREE, suit)) > -1);
