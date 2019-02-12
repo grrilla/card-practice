@@ -45,9 +45,6 @@ public class Deck {
       return false;
     }
 
-    // cast o to a Deck reference
-    Deck deck = (Deck) o;
-
     // reference the cards from each Deck
     Stack<Card> cards = this.getCards();
     Stack<Card> otherCards = ((Deck) o).getCards();
