@@ -1,96 +1,124 @@
 package models;
 
+import models.MajorArcanaCard.MajorArcana;
 import org.junit.Test;
 
 import java.util.Stack;
 
+import static models.MajorArcanaCard.MajorArcana.CHARIOT;
+import static models.MajorArcanaCard.MajorArcana.DEATH;
+import static models.MajorArcanaCard.MajorArcana.DEVIL;
+import static models.MajorArcanaCard.MajorArcana.EMPEROR;
+import static models.MajorArcanaCard.MajorArcana.EMPRESS;
+import static models.MajorArcanaCard.MajorArcana.FOOL;
+import static models.MajorArcanaCard.MajorArcana.HANGED_MAN;
+import static models.MajorArcanaCard.MajorArcana.HERMIT;
+import static models.MajorArcanaCard.MajorArcana.HIEROPHANT;
+import static models.MajorArcanaCard.MajorArcana.HIGH_PRIESTESS;
+import static models.MajorArcanaCard.MajorArcana.JUDGEMENT;
+import static models.MajorArcanaCard.MajorArcana.JUSTICE;
+import static models.MajorArcanaCard.MajorArcana.LOVERS;
+import static models.MajorArcanaCard.MajorArcana.MAGICIAN;
+import static models.MajorArcanaCard.MajorArcana.MOON;
+import static models.MajorArcanaCard.MajorArcana.STAR;
+import static models.MajorArcanaCard.MajorArcana.STRENGTH;
+import static models.MajorArcanaCard.MajorArcana.SUN;
+import static models.MajorArcanaCard.MajorArcana.TEMPERANCE;
+import static models.MajorArcanaCard.MajorArcana.TOWER;
+import static models.MajorArcanaCard.MajorArcana.WHEEL_OF_FORTUNE;
+import static models.MajorArcanaCard.MajorArcana.WORLD;
+import static models.MajorArcanaCard.MajorArcanaRank.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class MajorArcanaCardTest {
   
   @Test
-  public void testCreateMajorArcanaCard() {
-    assertNotNull(new MajorArcanaCard());
+  public void testMajorArcanaCardHasCorrectSuitAndRank() {
+    MajorArcanaCard card = new MajorArcanaCard(MAGICIAN);
+    assertEquals(I, card.getRank());
+    assertEquals(MAGICIAN, card.getSuit());
+
+    card = new MajorArcanaCard(WORLD);
+    assertEquals(XXI, card.getRank());
+    assertEquals(WORLD, card.getSuit());
+
+    card = new MajorArcanaCard(FOOL);
+    assertNotEquals(X, card.getRank());
   }
 
   @Test
-  public void testMajorArcanaCardHasSuitAndRank() {
-    MajorArcanaCard majorArcana = new MajorArcanaCard();
-    assertEquals(ACE, majorArcana.getRank());
-    assertEquals(SWORDS, majorArcana.getSuit());
-  }
-
-  @Test
-  public void testMajorArcanaCardHasSpecifiedSuitAndRank() {
-    MajorArcanaCard majorArcana = new MajorArcanaCard(ACE, SWORDS);
-    assertEquals(ACE, majorArcana.getRank());
-    assertEquals(SWORDS, majorArcana.getSuit());
-
-    majorArcana = new MajorArcanaCard(TWO, PENTACLES);
-    assertEquals(TWO, majorArcana.getRank());
-    assertEquals(PENTACLES, majorArcana.getSuit());
+  public void testMajorArcanaDeterminesRank() {
+    assertEquals(O, new MajorArcanaCard(FOOL).getRank());
+    assertEquals(I, new MajorArcanaCard(MAGICIAN).getRank());
+    assertEquals(II, new MajorArcanaCard(HIGH_PRIESTESS).getRank());
+    assertEquals(III, new MajorArcanaCard(EMPRESS).getRank());
+    assertEquals(IV, new MajorArcanaCard(EMPEROR).getRank());
+    assertEquals(V, new MajorArcanaCard(HIEROPHANT).getRank());
+    assertEquals(VI, new MajorArcanaCard(LOVERS).getRank());
+    assertEquals(VII, new MajorArcanaCard(CHARIOT).getRank());
+    assertEquals(VIII, new MajorArcanaCard(STRENGTH).getRank());
+    assertEquals(IX, new MajorArcanaCard(HERMIT).getRank());
+    assertEquals(X, new MajorArcanaCard(WHEEL_OF_FORTUNE).getRank());
+    assertEquals(XI, new MajorArcanaCard(JUSTICE).getRank());
+    assertEquals(XII, new MajorArcanaCard(HANGED_MAN).getRank());
+    assertEquals(XIII, new MajorArcanaCard(DEATH).getRank());
+    assertEquals(XIV, new MajorArcanaCard(TEMPERANCE).getRank());
+    assertEquals(XV, new MajorArcanaCard(DEVIL).getRank());
+    assertEquals(XVI, new MajorArcanaCard(TOWER).getRank());
+    assertEquals(XVII, new MajorArcanaCard(STAR).getRank());
+    assertEquals(XVIII, new MajorArcanaCard(MOON).getRank());
+    assertEquals(XIX, new MajorArcanaCard(SUN).getRank());
+    assertEquals(XX, new MajorArcanaCard(JUDGEMENT).getRank());
+    assertEquals(XXI, new MajorArcanaCard(WORLD).getRank());
   }
 
   @Test
   public void testEveryMajorArcanaCardCanBeRepresented() {
-    Stack<PlayingCard> stackOfMajorArcanaCards = new Stack<>();
+    Stack<PlayingCard> cardStack = new Stack<>();
 
-    for (MajorArcanaSuit s : MajorArcanaSuit.values()) {
-      for (MajorArcanaRank r : MajorArcanaRank.values()) {
-        stackOfMajorArcanaCards.push(new MajorArcanaCard(r, s));
-      }
+    for (MajorArcana a : MajorArcana.values()) {
+        cardStack.push(new MajorArcanaCard(a));
     }
 
-    assertEquals(56, stackOfMajorArcanaCards.size());
-
-    assertMajorArcanaIsPresent(stackOfMajorArcanaCards);
+    assertEquals(22, cardStack.size());
+    assertAllMajorArcanaCardsArePresent(cardStack);
   }
 
-  private void assertMajorArcanaIsPresent(Stack<PlayingCard> stackOfTarotPlayingCards) {
-    assertAllRanksOfGivenSuitArePresent(stackOfTarotPlayingCards, SWORDS);
-    assertAllRanksOfGivenSuitArePresent(stackOfTarotPlayingCards, PENTACLES);
-    assertAllRanksOfGivenSuitArePresent(stackOfTarotPlayingCards, WANDS);
-    assertAllRanksOfGivenSuitArePresent(stackOfTarotPlayingCards, CUPS);
-  }
-
-  static void assertAllMajorArcanaCardsArePresent(Stack<PlayingCard> stackOfTarotPlayingCards, Suit suit) {
-
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(FOOL)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(MAGICIAN)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(HIGH_PRIESTESS)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(EMPRESS)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(EMPEROR)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(HIEROPHANT)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(LOVERS)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(CHARIOT)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(STRENGTH)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(HERMIT)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(WHEEL_OF_FORTUNE)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(JUSTICE)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(THE_HANGED_MAN)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(DEATH)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(TEMPERANCE)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(DEVIL)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(THE_TOWER)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(THE_STAR)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(THE_MOON)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(THE_SUN)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(JUDGEMENT)) > -1);
-    assertTrue(stackOfTarotPlayingCards.search(new MajorArcanaCard(THE_WORLD)) > -1);
+  static void assertAllMajorArcanaCardsArePresent(Stack<PlayingCard> cardStack) {
+    assertTrue(cardStack.search(new MajorArcanaCard(FOOL)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(MAGICIAN)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(HIGH_PRIESTESS)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(EMPRESS)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(EMPEROR)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(HIEROPHANT)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(LOVERS)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(CHARIOT)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(STRENGTH)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(HERMIT)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(WHEEL_OF_FORTUNE)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(JUSTICE)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(HANGED_MAN)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(DEATH)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(TEMPERANCE)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(DEVIL)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(TOWER)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(STAR)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(MOON)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(SUN)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(JUDGEMENT)) > -1);
+    assertTrue(cardStack.search(new MajorArcanaCard(WORLD)) > -1);
   }
 
   @Test
   public void testMajorArcanaCardPropertiesDetermineEquality() {
-    assertEquals(new MajorArcanaCard(), new MajorArcanaCard());
-    assertEquals(new MajorArcanaCard(TWO, SWORDS), new MajorArcanaCard(TWO, SWORDS));
-    assertNotEquals(new MajorArcanaCard(TWO, CUPS), new MajorArcanaCard(TWO, SWORDS));
+    assertEquals(new MajorArcanaCard(MAGICIAN), new MajorArcanaCard(MAGICIAN));
+    assertNotEquals(new MajorArcanaCard(MAGICIAN), new MajorArcanaCard(JUSTICE));
   }
 
   @Test
   public void testMajorArcanaCardIsHumanReadable() {
-    assertEquals("ACE of SWORDS", new MajorArcanaCard().toString());
+    assertEquals("XXI: The World", new MajorArcanaCard(WORLD).toString());
   }
 }
