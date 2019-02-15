@@ -10,7 +10,7 @@ public abstract class Deck {
 
   private Stack<PlayingCard> playingCards = new Stack<>();
 
-  Deck() {
+  protected Deck() {
     init();
   }
 

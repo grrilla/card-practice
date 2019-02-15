@@ -1,31 +1,21 @@
-package models;
+package models.standard;
 
-import models.StandardPlayingCard.StandardRank;
-import models.StandardPlayingCard.StandardSuit;
+import models.PlayingCard;
+import models.Suit;
+import models.standard.StandardPlayingCard;
+import models.standard.StandardPlayingCard.StandardRank;
+import models.standard.StandardPlayingCard.StandardSuit;
 import org.junit.Test;
 
 import java.util.Stack;
 
-import static models.StandardPlayingCard.StandardRank.*;
-import static models.StandardPlayingCard.StandardSuit.*;
+import static models.standard.StandardPlayingCard.StandardRank.*;
+import static models.standard.StandardPlayingCard.StandardSuit.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class StandardPlayingCardTest {
-
-  @Test
-  public void testCreateStandardPlayingCard() {
-    assertNotNull(new StandardPlayingCard());
-  }
-
-  @Test
-  public void testStandardPlayingCardHasSuitAndRank() {
-    StandardPlayingCard StandardPlayingCard = new StandardPlayingCard();
-    assertEquals(ACE, StandardPlayingCard.getRank());
-    assertEquals(SPADES, StandardPlayingCard.getSuit());
-  }
 
   @Test
   public void testStandardPlayingCardHasSpecifiedSuitAndRank() {
@@ -74,14 +64,13 @@ public class StandardPlayingCardTest {
 
   @Test
   public void testStandardPlayingCardPropertiesDetermineEquality() {
-    assertEquals(new StandardPlayingCard(), new StandardPlayingCard());
     assertEquals(new StandardPlayingCard(TWO, SPADES), new StandardPlayingCard(TWO, SPADES));
     assertNotEquals(new StandardPlayingCard(TWO, HEARTS), new StandardPlayingCard(TWO, SPADES));
   }
 
   @Test
   public void testStandardPlayingCardIsHumanReadable() {
-    assertEquals("ACE of SPADES", new StandardPlayingCard().toString());
+    assertEquals("ACE of SPADES", new StandardPlayingCard(ACE, SPADES).toString());
   }
 
 }

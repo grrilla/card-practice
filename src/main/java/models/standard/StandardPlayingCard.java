@@ -1,13 +1,10 @@
-package models;
+package models.standard;
 
-import static models.StandardPlayingCard.StandardRank.ACE;
-import static models.StandardPlayingCard.StandardSuit.SPADES;
+import models.PlayingCard;
+import models.Rank;
+import models.Suit;
 
 public class StandardPlayingCard extends PlayingCard {
-
-  public StandardPlayingCard() {
-    super(ACE, SPADES);
-  }
 
   public StandardPlayingCard(Rank rank, Suit suit) {
     super(rank, suit);

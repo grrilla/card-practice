@@ -7,7 +7,7 @@ public abstract class PlayingCard {
   private Rank rank;
   private Suit suit;
 
-  PlayingCard(Rank rank, Suit suit) {
+  protected PlayingCard(Rank rank, Suit suit) {
     this.rank = rank;
     this.suit = suit;
   }

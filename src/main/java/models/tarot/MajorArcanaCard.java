@@ -1,6 +1,9 @@
-package models;
+package models.tarot;
 
-import static models.MajorArcanaCard.MajorArcanaRank.*;
+import models.Rank;
+import models.Suit;
+
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.*;
 
 /**
  * We're going to get a little "fancier" with this class.
@@ -78,7 +81,7 @@ public class MajorArcanaCard extends TarotCard {
   /**
    * This Rank enum may seem less important since it just gets pulled in via the Suit enum
    * during construction, but we absolutely still need it. Recall that a PlayingCard has
-   * to have a Suit property and Rank property,m and that we reference them constantly in
+   * to have a Suit property and Rank property, and that we reference them constantly in
    * our tests. The class may do us favours in terms of constructing the object in a
    * consistent way, but we still want to have granular access to the card's properties.
    *

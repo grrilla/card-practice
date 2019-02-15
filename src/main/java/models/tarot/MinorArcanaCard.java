@@ -1,4 +1,7 @@
-package models;
+package models.tarot;
+
+import models.Rank;
+import models.Suit;
 
 public class MinorArcanaCard extends TarotCard {
 

@@ -1,7 +1,9 @@
-package models;
+package models.standard;
 
-import models.StandardPlayingCard.StandardRank;
-import models.StandardPlayingCard.StandardSuit;
+import models.Deck;
+import models.PlayingCard;
+import models.standard.StandardPlayingCard.StandardRank;
+import models.standard.StandardPlayingCard.StandardSuit;
 
 import java.util.Stack;
 

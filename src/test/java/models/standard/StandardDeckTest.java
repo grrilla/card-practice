@@ -1,15 +1,16 @@
-package models;
+package models.standard;
 
+import models.PlayingCard;
 import org.junit.Test;
 
 import java.util.HashSet;
 import java.util.Stack;
 
-import static models.StandardPlayingCard.StandardSuit.CLUBS;
-import static models.StandardPlayingCard.StandardSuit.DIAMONDS;
-import static models.StandardPlayingCard.StandardSuit.HEARTS;
-import static models.StandardPlayingCard.StandardSuit.SPADES;
-import static models.StandardPlayingCardTest.assertAllRanksOfGivenSuitArePresent;
+import static models.standard.StandardPlayingCard.StandardSuit.CLUBS;
+import static models.standard.StandardPlayingCard.StandardSuit.DIAMONDS;
+import static models.standard.StandardPlayingCard.StandardSuit.HEARTS;
+import static models.standard.StandardPlayingCard.StandardSuit.SPADES;
+import static models.standard.StandardPlayingCardTest.assertAllRanksOfGivenSuitArePresent;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;

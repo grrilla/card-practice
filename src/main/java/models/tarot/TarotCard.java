@@ -1,4 +1,8 @@
-package models;
+package models.tarot;
+
+import models.PlayingCard;
+import models.Rank;
+import models.Suit;
 
 public abstract class TarotCard extends PlayingCard {
 
