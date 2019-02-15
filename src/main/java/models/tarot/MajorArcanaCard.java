@@ -3,7 +3,28 @@ package models.tarot;
 import models.Rank;
 import models.Suit;
 
-import static models.tarot.MajorArcanaCard.MajorArcanaRank.*;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.I;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.II;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.III;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.IV;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.IX;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.O;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.V;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.VI;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.VII;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.VIII;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.X;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.XI;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.XII;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.XIII;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.XIV;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.XIX;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.XV;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.XVI;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.XVII;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.XVIII;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.XX;
+import static models.tarot.MajorArcanaCard.MajorArcanaRank.XXI;
 
 /**
  * We're going to get a little "fancier" with this class.
@@ -38,35 +59,37 @@ public class MajorArcanaCard extends TarotCard {
    * things we'll be adding to this enum in order to write a main() that does readings?
    */
   public enum MajorArcana implements Suit {
-    FOOL(O, "The Fool"),
-    MAGICIAN(I, "The Magician"),
-    HIGH_PRIESTESS(II, "High Priestess"),
-    EMPRESS(III, "The Empress"),
-    EMPEROR(IV, "The Emperor"),
-    HIEROPHANT(V, "The Hierophant"),
-    LOVERS(VI, "The Lovers"),
-    CHARIOT(VII, "The Chariot"),
-    STRENGTH(VIII, "Strength"),
-    HERMIT(IX, "The Hermit"),
-    WHEEL_OF_FORTUNE(X, "The Wheel of Fortune"),
-    JUSTICE(XI, "Justice"),
-    HANGED_MAN(XII, "The Hanged Man"),
-    DEATH(XIII, "Death"),
-    TEMPERANCE(XIV, "Temperance"),
-    DEVIL(XV, "The Devil"),
-    TOWER(XVI, "The Tower"),
-    STAR(XVII, "The Star"),
-    MOON(XVIII, "The Moon"),
-    SUN(XIX, "The Sun"),
-    JUDGEMENT(XX, "Judgement"),
-    WORLD(XXI, "The World");
+    FOOL(O, "The Fool", "awareness"),
+    MAGICIAN(I, "The Magician", "attention"),
+    HIGH_PRIESTESS(II, "High Priestess", "memory"),
+    EMPRESS(III, "The Empress", "imagination"),
+    EMPEROR(IV, "The Emperor", "reason"),
+    HIEROPHANT(V, "The Hierophant", "intuition"),
+    LOVERS(VI, "The Lovers", "discrimination"),
+    CHARIOT(VII, "The Chariot", "receptivity"),
+    STRENGTH(VIII, "Strength", "courage"),
+    HERMIT(IX, "The Hermit", "exemplification"),
+    WHEEL_OF_FORTUNE(X, "The Wheel of Fortune", "cycles"),
+    JUSTICE(XI, "Justice", "unfailing justice"),
+    HANGED_MAN(XII, "The Hanged Man", "a change in thinking"),
+    DEATH(XIII, "Death", "a change in behaviour"),
+    TEMPERANCE(XIV, "Temperance", "verification"),
+    DEVIL(XV, "The Devil", "materialism"),
+    TOWER(XVI, "The Tower", "awakening"),
+    STAR(XVII, "The Star", "meditation"),
+    MOON(XVIII, "The Moon", "deception"),
+    SUN(XIX, "The Sun", "expansion"),
+    JUDGEMENT(XX, "Judgement", "realization"),
+    WORLD(XXI, "The World", "completion");
 
     private final MajorArcanaRank rank;
     private final String name;
+    private String meaning;
 
-    MajorArcana(MajorArcanaRank rank, String name) {
+    MajorArcana(MajorArcanaRank rank, String name, String meaning) {
       this.rank = rank;
       this.name = name;
+      this.meaning = meaning;
     }
 
     public MajorArcanaRank getRank() {
@@ -75,6 +98,10 @@ public class MajorArcanaCard extends TarotCard {
 
     public String getName() {
       return name;
+    }
+
+    public String getMeaning() {
+      return meaning;
     }
   }
 
@@ -122,6 +149,10 @@ public class MajorArcanaCard extends TarotCard {
     public int getValue() {
       return value;
     }
+  }
+
+  public String getMeaning() {
+    return ((MajorArcana) this.getSuit()).getMeaning();
   }
 
   /**
