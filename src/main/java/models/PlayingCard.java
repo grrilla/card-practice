@@ -2,41 +2,12 @@ package models;
 
 import java.util.Objects;
 
-public class Card {
-
-  public enum Rank {
-    ACE,
-    TWO,
-    THREE,
-    FOUR,
-    FIVE,
-    SIX,
-    SEVEN,
-    EIGHT,
-    NINE,
-    TEN,
-    JACK,
-    QUEEN,
-    KING
-  }
-
-  public enum Suit {
-    DIAMONDS,
-    CLUBS,
-    HEARTS,
-    SPADES
-  }
+public abstract class PlayingCard {
 
   private Rank rank;
   private Suit suit;
 
-  // should be used for testing purposes only
-  public Card() {
-    this.rank = Rank.ACE;
-    this.suit = Suit.SPADES;
-  }
-
-  public Card(Rank rank, Suit suit) {
+  protected PlayingCard(Rank rank, Suit suit) {
     this.rank = rank;
     this.suit = suit;
   }
@@ -56,8 +27,8 @@ public class Card {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Card card = (Card) o;
-    return rank == card.rank && suit == card.suit;
+    PlayingCard playingCard = (PlayingCard) o;
+    return rank == playingCard.rank && suit == playingCard.suit;
   }
 
   public int hashCode() {
