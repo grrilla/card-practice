@@ -18,9 +18,6 @@ public class TarotReading extends CardGame {
     super(new TarotDeck());
   }
 
-  protected void init() {
-  }
-
   protected void deal() {
     Stack<PlayingCard> cards = this.getDeck().getPlayingCards();
     this.past = (TarotCard) cards.pop();

@@ -6,7 +6,6 @@ public abstract class CardGame {
 
   public CardGame(Deck deck) {
     this.deck = deck;
-    init();
     deck.shuffle();
     deal();
   }
@@ -14,8 +13,6 @@ public abstract class CardGame {
   public Deck getDeck() {
     return deck;
   }
-
-  protected abstract void init();
 
   protected abstract void deal();
 }

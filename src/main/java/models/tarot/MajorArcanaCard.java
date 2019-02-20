@@ -26,38 +26,12 @@ import static models.tarot.MajorArcanaCard.MajorArcanaRank.XVIII;
 import static models.tarot.MajorArcanaCard.MajorArcanaRank.XX;
 import static models.tarot.MajorArcanaCard.MajorArcanaRank.XXI;
 
-/**
- * We're going to get a little "fancier" with this class.
- *
- * If we think about it, a Major Arcana card has a rank and suit, but they're correlative;
- * you will never see The Magician not have a rank of 1, for example. Therefore, we should construct
- * them in such a way that this relationship is represented and enforced.
- *
- * Be sure to have a look at the test class as well. Compare it to the others - notice the similarities
- * but also improvements due to this class' exceptional nature. Also notice that while we know certain
- * things to be true about the Major Arcana, we are still acknowledging and leveraging the fact that it
- * is inherently a PlayingCard by nature and using inheritance to construct our ordered universe.
- */
 public class MajorArcanaCard extends TarotCard {
 
-  /**
-   * This constructor is a break from the usual pattern of taking rank and suit and passing them
-   * up to the parent. I only actually need to know one to infer the other. Therefore, I'm only asking
-   * for the "suit", which I'm generalizing with the name "arcana".
-   *
-   * @param arcana The MajorArcana this object represents (the enum directly below)
-   */
   public MajorArcanaCard(MajorArcana arcana) {
     super(arcana.getRank(), arcana);
   }
 
-  /**
-   * I'm using this Suit as the base for this object, but you could just as easily use
-   * the Rank. The important thing is that one uses a constructor to forge the bond it's
-   * members has with the other. While I'm at it, why not include a human readable version of
-   * the name. Is there anywhere else we could be doing this? Can you guess at some other
-   * things we'll be adding to this enum in order to write a main() that does readings?
-   */
   public enum MajorArcana implements Suit {
     FOOL(O, "The Fool", "awareness"),
     MAGICIAN(I, "The Magician", "attention"),
@@ -105,17 +79,6 @@ public class MajorArcanaCard extends TarotCard {
     }
   }
 
-  /**
-   * This Rank enum may seem less important since it just gets pulled in via the Suit enum
-   * during construction, but we absolutely still need it. Recall that a PlayingCard has
-   * to have a Suit property and Rank property, and that we reference them constantly in
-   * our tests. The class may do us favours in terms of constructing the object in a
-   * consistent way, but we still want to have granular access to the card's properties.
-   *
-   * One example of this is suggested by the addition of a integer value property. What other
-   * objects might find this useful? Why? Should all Ranks have a numeric value property? How
-   * do we enforce that?
-   */
   public enum MajorArcanaRank implements Rank {
     O(0),
     I(1),
@@ -155,16 +118,6 @@ public class MajorArcanaCard extends TarotCard {
     return ((MajorArcana) this.getSuit()).getMeaning();
   }
 
-  /**
-   * I went to the trouble of making a prettified version of each MajorArcana's name, but
-   * what good is that if we call PlayingCard::toString and it prints "I of The Magician"?
-   * For all children up until now, PlayingCard::toString worked well, but it's time to write
-   * another override, I think.
-   *
-   * PlayingCard::getSuit returns a Suit, which doesn't have getName() on it. I need to let
-   * the compiler know the Suit I'm getting is a MajorArcana specifically, since the Suit for
-   * this class will always be such. For this, we use a type cast.
-   */
   public String toString() {
     return this.getRank().toString() + ": " + ((MajorArcana) this.getSuit()).getName();
   }
