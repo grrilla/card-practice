@@ -15,6 +15,7 @@ public class TarotReading extends CardGame<TarotDeck> {
 
   public TarotReading() {
     super(new TarotDeck());
+    deal();
   }
 
   protected void deal() {

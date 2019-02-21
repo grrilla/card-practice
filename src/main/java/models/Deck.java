@@ -20,6 +20,10 @@ public abstract class Deck<T extends PlayingCard> {
     return playingCards;
   }
 
+  public T draw() {
+    return playingCards.pop();
+  }
+
   public void shuffle() {
     ArrayList<T> cardsInOrder = new ArrayList<>();
     while (!playingCards.empty()) {
