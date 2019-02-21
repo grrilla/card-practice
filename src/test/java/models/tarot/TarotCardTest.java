@@ -1,9 +1,5 @@
 package models.tarot;
 
-import models.PlayingCard;
-import models.tarot.MajorArcanaCard.MajorArcana;
-import models.tarot.MinorArcanaCard.MinorArcanaRank;
-import models.tarot.MinorArcanaCard.MinorArcanaSuit;
 import org.junit.Test;
 
 import java.util.Stack;
@@ -15,7 +11,7 @@ public class TarotCardTest {
 
   @Test
   public void testEveryTarotCardCanBeRepresented() {
-    Stack<PlayingCard> cardStack = new Stack<>();
+    Stack<TarotCard> cardStack = new Stack<>();
 
     for (MinorArcanaSuit s : MinorArcanaSuit.values()) {
       for (MinorArcanaRank r : MinorArcanaRank.values()) {

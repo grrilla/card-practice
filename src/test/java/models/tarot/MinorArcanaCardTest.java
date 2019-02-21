@@ -1,32 +1,27 @@
 package models.tarot;
 
-import models.PlayingCard;
-import models.Suit;
-import models.tarot.MinorArcanaCard;
-import models.tarot.MinorArcanaCard.MinorArcanaRank;
-import models.tarot.MinorArcanaCard.MinorArcanaSuit;
 import org.junit.Test;
 
 import java.util.Stack;
 
-import static models.tarot.MinorArcanaCard.MinorArcanaRank.ACE;
-import static models.tarot.MinorArcanaCard.MinorArcanaRank.EIGHT;
-import static models.tarot.MinorArcanaCard.MinorArcanaRank.FIVE;
-import static models.tarot.MinorArcanaCard.MinorArcanaRank.FOUR;
-import static models.tarot.MinorArcanaCard.MinorArcanaRank.KING;
-import static models.tarot.MinorArcanaCard.MinorArcanaRank.KNIGHT;
-import static models.tarot.MinorArcanaCard.MinorArcanaRank.NINE;
-import static models.tarot.MinorArcanaCard.MinorArcanaRank.PAIGE;
-import static models.tarot.MinorArcanaCard.MinorArcanaRank.QUEEN;
-import static models.tarot.MinorArcanaCard.MinorArcanaRank.SEVEN;
-import static models.tarot.MinorArcanaCard.MinorArcanaRank.SIX;
-import static models.tarot.MinorArcanaCard.MinorArcanaRank.TEN;
-import static models.tarot.MinorArcanaCard.MinorArcanaRank.THREE;
-import static models.tarot.MinorArcanaCard.MinorArcanaRank.TWO;
-import static models.tarot.MinorArcanaCard.MinorArcanaSuit.CUPS;
-import static models.tarot.MinorArcanaCard.MinorArcanaSuit.PENTACLES;
-import static models.tarot.MinorArcanaCard.MinorArcanaSuit.SWORDS;
-import static models.tarot.MinorArcanaCard.MinorArcanaSuit.WANDS;
+import static models.tarot.MinorArcanaRank.ACE;
+import static models.tarot.MinorArcanaRank.EIGHT;
+import static models.tarot.MinorArcanaRank.FIVE;
+import static models.tarot.MinorArcanaRank.FOUR;
+import static models.tarot.MinorArcanaRank.KING;
+import static models.tarot.MinorArcanaRank.KNIGHT;
+import static models.tarot.MinorArcanaRank.NINE;
+import static models.tarot.MinorArcanaRank.PAIGE;
+import static models.tarot.MinorArcanaRank.QUEEN;
+import static models.tarot.MinorArcanaRank.SEVEN;
+import static models.tarot.MinorArcanaRank.SIX;
+import static models.tarot.MinorArcanaRank.TEN;
+import static models.tarot.MinorArcanaRank.THREE;
+import static models.tarot.MinorArcanaRank.TWO;
+import static models.tarot.MinorArcanaSuit.CUPS;
+import static models.tarot.MinorArcanaSuit.PENTACLES;
+import static models.tarot.MinorArcanaSuit.SWORDS;
+import static models.tarot.MinorArcanaSuit.WANDS;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
@@ -46,7 +41,7 @@ public class MinorArcanaCardTest {
 
   @Test
   public void testEveryMinorArcanaCardCanBeRepresented() {
-    Stack<PlayingCard> cardStack = new Stack<>();
+    Stack<TarotCard> cardStack = new Stack<>();
     for (MinorArcanaSuit s : MinorArcanaSuit.values()) {
       for (MinorArcanaRank r : MinorArcanaRank.values()) {
         cardStack.push(new MinorArcanaCard(r, s));
@@ -55,14 +50,14 @@ public class MinorArcanaCardTest {
     assertAllMinorArcanaCardsArePresent(cardStack);
   }
 
-  static void assertAllMinorArcanaCardsArePresent(Stack<PlayingCard> cardStack) {
+  static void assertAllMinorArcanaCardsArePresent(Stack<TarotCard> cardStack) {
     assertAllRanksOfGivenSuitArePresent(cardStack, SWORDS);
     assertAllRanksOfGivenSuitArePresent(cardStack, PENTACLES);
     assertAllRanksOfGivenSuitArePresent(cardStack, WANDS);
     assertAllRanksOfGivenSuitArePresent(cardStack, CUPS);
   }
   
-  private static void assertAllRanksOfGivenSuitArePresent(Stack<PlayingCard> cardStack, Suit suit) {
+  private static void assertAllRanksOfGivenSuitArePresent(Stack<TarotCard> cardStack, MinorArcanaSuit suit) {
     assertTrue(cardStack.search(new MinorArcanaCard(ACE, suit)) > -1);
     assertTrue(cardStack.search(new MinorArcanaCard(TWO, suit)) > -1);
     assertTrue(cardStack.search(new MinorArcanaCard(THREE, suit)) > -1);

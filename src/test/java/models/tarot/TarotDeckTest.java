@@ -1,6 +1,5 @@
 package models.tarot;
 
-import models.PlayingCard;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -23,14 +22,14 @@ public class TarotDeckTest {
 
   @Test
   public void testNewTarotDeckContainsAllTarotCards() {
-    Stack<PlayingCard> cardStack = new TarotDeck().getPlayingCards();
+    Stack<TarotCard> cardStack = new TarotDeck().getPlayingCards();
     assertAllMinorArcanaCardsArePresent(cardStack);
     assertAllMajorArcanaCardsArePresent(cardStack);
   }
 
   @Test
   public void testNewTarotDeckContainsNoDuplicates() {
-    Stack<PlayingCard> playingCards = new TarotDeck().getPlayingCards();
+    Stack<TarotCard> playingCards = new TarotDeck().getPlayingCards();
     assertEquals(playingCards.size(), new HashSet<>(playingCards).size());
   }
 

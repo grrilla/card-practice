@@ -2,21 +2,21 @@ package models;
 
 import java.util.Objects;
 
-public abstract class PlayingCard {
+public abstract class PlayingCard<R extends Rank, S extends Suit> {
 
-  private Rank rank;
-  private Suit suit;
+  private R rank;
+  private S suit;
 
-  protected PlayingCard(Rank rank, Suit suit) {
+  protected PlayingCard(R rank, S suit) {
     this.rank = rank;
     this.suit = suit;
   }
 
-  public Rank getRank() {
+  public R getRank() {
     return rank;
   }
 
-  public Suit getSuit() {
+  public S getSuit() {
     return suit;
   }
 

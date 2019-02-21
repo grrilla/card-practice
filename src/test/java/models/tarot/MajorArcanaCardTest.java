@@ -1,35 +1,53 @@
 package models.tarot;
 
-import models.PlayingCard;
-import models.tarot.MajorArcanaCard;
-import models.tarot.MajorArcanaCard.MajorArcana;
 import org.junit.Test;
 
 import java.util.Stack;
 
-import static models.tarot.MajorArcanaCard.MajorArcana.CHARIOT;
-import static models.tarot.MajorArcanaCard.MajorArcana.DEATH;
-import static models.tarot.MajorArcanaCard.MajorArcana.DEVIL;
-import static models.tarot.MajorArcanaCard.MajorArcana.EMPEROR;
-import static models.tarot.MajorArcanaCard.MajorArcana.EMPRESS;
-import static models.tarot.MajorArcanaCard.MajorArcana.FOOL;
-import static models.tarot.MajorArcanaCard.MajorArcana.HANGED_MAN;
-import static models.tarot.MajorArcanaCard.MajorArcana.HERMIT;
-import static models.tarot.MajorArcanaCard.MajorArcana.HIEROPHANT;
-import static models.tarot.MajorArcanaCard.MajorArcana.HIGH_PRIESTESS;
-import static models.tarot.MajorArcanaCard.MajorArcana.JUDGEMENT;
-import static models.tarot.MajorArcanaCard.MajorArcana.JUSTICE;
-import static models.tarot.MajorArcanaCard.MajorArcana.LOVERS;
-import static models.tarot.MajorArcanaCard.MajorArcana.MAGICIAN;
-import static models.tarot.MajorArcanaCard.MajorArcana.MOON;
-import static models.tarot.MajorArcanaCard.MajorArcana.STAR;
-import static models.tarot.MajorArcanaCard.MajorArcana.STRENGTH;
-import static models.tarot.MajorArcanaCard.MajorArcana.SUN;
-import static models.tarot.MajorArcanaCard.MajorArcana.TEMPERANCE;
-import static models.tarot.MajorArcanaCard.MajorArcana.TOWER;
-import static models.tarot.MajorArcanaCard.MajorArcana.WHEEL_OF_FORTUNE;
-import static models.tarot.MajorArcanaCard.MajorArcana.WORLD;
-import static models.tarot.MajorArcanaCard.MajorArcanaRank.*;
+import static models.tarot.MajorArcana.CHARIOT;
+import static models.tarot.MajorArcana.DEATH;
+import static models.tarot.MajorArcana.DEVIL;
+import static models.tarot.MajorArcana.EMPEROR;
+import static models.tarot.MajorArcana.EMPRESS;
+import static models.tarot.MajorArcana.FOOL;
+import static models.tarot.MajorArcana.HANGED_MAN;
+import static models.tarot.MajorArcana.HERMIT;
+import static models.tarot.MajorArcana.HIEROPHANT;
+import static models.tarot.MajorArcana.HIGH_PRIESTESS;
+import static models.tarot.MajorArcana.JUDGEMENT;
+import static models.tarot.MajorArcana.JUSTICE;
+import static models.tarot.MajorArcana.LOVERS;
+import static models.tarot.MajorArcana.MAGICIAN;
+import static models.tarot.MajorArcana.MOON;
+import static models.tarot.MajorArcana.STAR;
+import static models.tarot.MajorArcana.STRENGTH;
+import static models.tarot.MajorArcana.SUN;
+import static models.tarot.MajorArcana.TEMPERANCE;
+import static models.tarot.MajorArcana.TOWER;
+import static models.tarot.MajorArcana.WHEEL_OF_FORTUNE;
+import static models.tarot.MajorArcana.WORLD;
+import static models.tarot.MajorArcanaNumeral.I;
+import static models.tarot.MajorArcanaNumeral.II;
+import static models.tarot.MajorArcanaNumeral.III;
+import static models.tarot.MajorArcanaNumeral.IV;
+import static models.tarot.MajorArcanaNumeral.IX;
+import static models.tarot.MajorArcanaNumeral.O;
+import static models.tarot.MajorArcanaNumeral.V;
+import static models.tarot.MajorArcanaNumeral.VI;
+import static models.tarot.MajorArcanaNumeral.VII;
+import static models.tarot.MajorArcanaNumeral.VIII;
+import static models.tarot.MajorArcanaNumeral.X;
+import static models.tarot.MajorArcanaNumeral.XI;
+import static models.tarot.MajorArcanaNumeral.XII;
+import static models.tarot.MajorArcanaNumeral.XIII;
+import static models.tarot.MajorArcanaNumeral.XIV;
+import static models.tarot.MajorArcanaNumeral.XIX;
+import static models.tarot.MajorArcanaNumeral.XV;
+import static models.tarot.MajorArcanaNumeral.XVI;
+import static models.tarot.MajorArcanaNumeral.XVII;
+import static models.tarot.MajorArcanaNumeral.XVIII;
+import static models.tarot.MajorArcanaNumeral.XX;
+import static models.tarot.MajorArcanaNumeral.XXI;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
@@ -78,7 +96,7 @@ public class MajorArcanaCardTest {
 
   @Test
   public void testEveryMajorArcanaCardCanBeRepresented() {
-    Stack<PlayingCard> cardStack = new Stack<>();
+    Stack<TarotCard> cardStack = new Stack<>();
 
     for (MajorArcana a : MajorArcana.values()) {
         cardStack.push(new MajorArcanaCard(a));
@@ -88,7 +106,7 @@ public class MajorArcanaCardTest {
     assertAllMajorArcanaCardsArePresent(cardStack);
   }
 
-  static void assertAllMajorArcanaCardsArePresent(Stack<PlayingCard> cardStack) {
+  static void assertAllMajorArcanaCardsArePresent(Stack<TarotCard> cardStack) {
     assertTrue(cardStack.search(new MajorArcanaCard(FOOL)) > -1);
     assertTrue(cardStack.search(new MajorArcanaCard(MAGICIAN)) > -1);
     assertTrue(cardStack.search(new MajorArcanaCard(HIGH_PRIESTESS)) > -1);

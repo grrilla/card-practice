@@ -1,6 +1,5 @@
 package models.standard;
 
-import models.PlayingCard;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -32,7 +31,7 @@ public class StandardDeckTest {
 
   @Test
   public void testNewStandardDeckContainsAllStandardCards() {
-    Stack<PlayingCard> stackOfPlayingCards = new StandardDeck().getPlayingCards();
+    Stack<StandardPlayingCard> stackOfPlayingCards = new StandardDeck().getPlayingCards();
     assertAllRanksOfGivenSuitArePresent(stackOfPlayingCards, SPADES);
     assertAllRanksOfGivenSuitArePresent(stackOfPlayingCards, DIAMONDS);
     assertAllRanksOfGivenSuitArePresent(stackOfPlayingCards, CLUBS);
@@ -41,7 +40,7 @@ public class StandardDeckTest {
 
   @Test
   public void testNewStandardDeckContainsNoDuplicates() {
-    Stack<PlayingCard> playingCards = new StandardDeck().getPlayingCards();
+    Stack<StandardPlayingCard> playingCards = new StandardDeck().getPlayingCards();
     assertEquals(playingCards.size(), new HashSet<>(playingCards).size());
   }
 

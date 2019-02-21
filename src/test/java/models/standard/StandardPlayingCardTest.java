@@ -1,16 +1,29 @@
 package models.standard;
 
 import models.PlayingCard;
-import models.Suit;
-import models.standard.StandardPlayingCard;
 import models.standard.StandardPlayingCard.StandardRank;
 import models.standard.StandardPlayingCard.StandardSuit;
 import org.junit.Test;
 
 import java.util.Stack;
 
-import static models.standard.StandardPlayingCard.StandardRank.*;
-import static models.standard.StandardPlayingCard.StandardSuit.*;
+import static models.standard.StandardPlayingCard.StandardRank.ACE;
+import static models.standard.StandardPlayingCard.StandardRank.EIGHT;
+import static models.standard.StandardPlayingCard.StandardRank.FIVE;
+import static models.standard.StandardPlayingCard.StandardRank.FOUR;
+import static models.standard.StandardPlayingCard.StandardRank.JACK;
+import static models.standard.StandardPlayingCard.StandardRank.KING;
+import static models.standard.StandardPlayingCard.StandardRank.NINE;
+import static models.standard.StandardPlayingCard.StandardRank.QUEEN;
+import static models.standard.StandardPlayingCard.StandardRank.SEVEN;
+import static models.standard.StandardPlayingCard.StandardRank.SIX;
+import static models.standard.StandardPlayingCard.StandardRank.TEN;
+import static models.standard.StandardPlayingCard.StandardRank.THREE;
+import static models.standard.StandardPlayingCard.StandardRank.TWO;
+import static models.standard.StandardPlayingCard.StandardSuit.CLUBS;
+import static models.standard.StandardPlayingCard.StandardSuit.DIAMONDS;
+import static models.standard.StandardPlayingCard.StandardSuit.HEARTS;
+import static models.standard.StandardPlayingCard.StandardSuit.SPADES;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertTrue;
@@ -30,7 +43,7 @@ public class StandardPlayingCardTest {
 
   @Test
   public void testEveryStandardStandardPlayingCardCanBeRepresented() {
-    Stack<PlayingCard> stackOfStandardPlayingPlayingCards = new Stack<>();
+    Stack<StandardPlayingCard> stackOfStandardPlayingPlayingCards = new Stack<>();
 
     for (StandardSuit s : StandardSuit.values()) {
       for (StandardRank r : StandardRank.values()) {
@@ -46,7 +59,7 @@ public class StandardPlayingCardTest {
     assertAllRanksOfGivenSuitArePresent(stackOfStandardPlayingPlayingCards, HEARTS);
   }
 
-  static void assertAllRanksOfGivenSuitArePresent(Stack<PlayingCard> stackOfStandardPlayingPlayingCards, Suit suit) {
+  static void assertAllRanksOfGivenSuitArePresent(Stack<StandardPlayingCard> stackOfStandardPlayingPlayingCards, StandardSuit suit) {
     assertTrue(stackOfStandardPlayingPlayingCards.search(new StandardPlayingCard(ACE, suit)) > -1);
     assertTrue(stackOfStandardPlayingPlayingCards.search(new StandardPlayingCard(TWO, suit)) > -1);
     assertTrue(stackOfStandardPlayingPlayingCards.search(new StandardPlayingCard(THREE, suit)) > -1);

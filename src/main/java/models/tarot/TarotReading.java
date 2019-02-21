@@ -1,13 +1,12 @@
 package models.tarot;
 
 import models.CardGame;
-import models.PlayingCard;
 
 import java.util.Stack;
 
 import static java.lang.String.format;
 
-public class TarotReading extends CardGame {
+public class TarotReading extends CardGame<TarotDeck> {
 
   private TarotCard past;
   private TarotCard present;
@@ -19,11 +18,11 @@ public class TarotReading extends CardGame {
   }
 
   protected void deal() {
-    Stack<PlayingCard> cards = this.getDeck().getPlayingCards();
-    this.past = (TarotCard) cards.pop();
-    this.present = (TarotCard) cards.pop();
-    this.future = (TarotCard) cards.pop();
-    this.overArching = (TarotCard) cards.pop();
+    Stack<TarotCard> cards = this.getDeck().getPlayingCards();
+    this.past = cards.pop();
+    this.present = cards.pop();
+    this.future = cards.pop();
+    this.overArching = cards.pop();
   }
 
   public TarotCard getPast() {

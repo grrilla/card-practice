@@ -1,16 +1,16 @@
 package models;
 
-public abstract class CardGame {
+public abstract class CardGame<T extends Deck> {
 
-  private Deck deck;
+  private T deck;
 
-  public CardGame(Deck deck) {
+  public CardGame(T deck) {
     this.deck = deck;
     deck.shuffle();
     deal();
   }
 
-  public Deck getDeck() {
+  public T getDeck() {
     return deck;
   }
 
