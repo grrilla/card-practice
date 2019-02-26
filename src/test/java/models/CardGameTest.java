@@ -1,6 +1,5 @@
 package models;
 
-public class CardGameTest {
-
+class CardGameTest {
 
 }
