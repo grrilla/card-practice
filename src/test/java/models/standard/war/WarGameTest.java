@@ -2,10 +2,13 @@ package models.standard.war;
 
 import models.Deck;
 import models.standard.StandardDeck;
+import models.standard.StandardPlayingCard;
+
 import org.junit.Test;
 
 import java.util.List;
 
+import static models.standard.war.WarGame.evaluatePlay;
 import static org.junit.Assert.*;
 
 public class WarGameTest {
@@ -45,15 +48,32 @@ public class WarGameTest {
         assertEquals(13, newGame.getDealer().getHand().size());
     }
 
-//    @Test
-//    public void testWarPlayerCanPlayOneCardOnTurn() {
-//        WarGame game = new WarGame();
-//        List<WarPlayer> players = game.getPlayers();
-//        assertEquals(1, players.size());
-//        WarPlayer onlyPlayer = players.get(0);
-//
-//        assertEquals(2, onlyPlayer.getHand().size());
-//        game.play(onlyPlayer);
-//        assertEquals(3, onlyPlayer.getHand().size());
-//    }
+    @Test
+    public void testWarPlayerCanPlayOneCardOnTurn() {
+        WarGame game = new WarGame();
+        List<WarPlayer> players = game.getPlayers();
+        assertEquals(1, players.size());
+        WarPlayer onlyPlayer = players.get(0);
+
+        assertEquals(26, onlyPlayer.getHand().size());
+        onlyPlayer.play();
+        assertEquals(25, onlyPlayer.getHand().size());
+    }
+
+    @Test
+    public void testARoundOfPlayedCardsCanBeEvaluated() {
+        WarGame game = new WarGame();
+        List<WarPlayer> players = game.getPlayers();
+        WarPlayer dealer = game.getDealer();
+        for (WarPlayer p : players) {
+            StandardPlayingCard playerPeeked = p.getHand().getCards().peek();
+            int playerPeekedValue = playerPeeked.getRank().getValue();
+            p.play();
+            assertEquals(playerPeekedValue, evaluatePlay(p));
+        }
+        StandardPlayingCard dealerPeeked = dealer.getHand().getCards().peek();
+        dealer.play();
+        int dealerPeekedValue = dealerPeeked.getRank().getValue();
+        assertEquals(dealerPeekedValue, evaluatePlay(dealer));
+    }
 }

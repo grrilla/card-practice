@@ -2,6 +2,7 @@ package models.standard.war;
 
 import models.Hand;
 import models.standard.StandardPlayingCard;
+import models.standard.StandardPlayingCard.*;
 
 import java.util.Stack;
 

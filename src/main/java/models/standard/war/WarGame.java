@@ -27,9 +27,9 @@ public class WarGame extends CardGame<StandardDeck, WarPlayer> {
             }
         }
     }
-//
-//    public void play(WarPlayer player) {
-//        WarHand hand = player.getHand();
-//        return hand.pop();
-//    }
+
+    public static int evaluatePlay(WarPlayer player) {
+        int playValue = player.getPlayValue();
+        return playValue;
+    }
 }

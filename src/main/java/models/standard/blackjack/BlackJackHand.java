@@ -18,6 +18,7 @@ public class BlackJackHand extends Hand<StandardPlayingCard, ArrayList<StandardP
 
     private int lowValue;
     private int highValue;
+
     private List<StandardPlayingCard> cards = new ArrayList<>();
 
     public int getLowValue() {
