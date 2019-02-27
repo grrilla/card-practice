@@ -6,6 +6,7 @@ import models.standard.StandardPlayingCard;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static models.standard.war.WarGame.evaluatePlay;
@@ -61,7 +62,7 @@ public class WarGameTest {
     }
 
     @Test
-    public void testARoundOfPlayedCardsCanBeEvaluated() {
+    public void testARoundOfPlayedCardsIsTheValueOfOneCardFromTheTopOfEachPlayersHand() {
         WarGame game = new WarGame();
         List<WarPlayer> players = game.getPlayers();
         WarPlayer dealer = game.getDealer();
@@ -78,14 +79,25 @@ public class WarGameTest {
     }
 
     @Test
-    public void testEvaluationFavoursHighestValuationInRound() {
+    public void testARoundOfPlayedCardsCanBeEvaluatedByReturningHighestValue() {
         WarGame game = new WarGame();
         List<WarPlayer> players = game.getPlayers();
-        WarPlayer dealer = game.getDealer();
-        for (WarPlayer p : players) {
-            p.play();
-        }
-        dealer.play();
-        assertNotNull(game.evaluateRound());
+        players.clear();
+        ArrayList<Integer> round = game.round;
+        round.add(2);
+        round.add(10);
+        assertEquals(10, game.evaluateRound());
     }
+
+//    @Test
+//    public void testWinnerOfRoundGetsAllCardsFromRound() {
+//        WarGame game = new WarGame();
+//        List<WarPlayer> players = game.getPlayers();
+//        WarPlayer dealer = game.getDealer();
+//        for (WarPlayer p : players) {
+//            p.play();
+//        }
+//        dealer.play();
+//        assertNotNull(game.evaluateRound());
+//    }
 }

@@ -9,7 +9,7 @@ import java.util.Collections;
 public class WarGame extends CardGame<StandardDeck, WarPlayer> {
 
     public static final int DEFAULT_NUMBER_OF_PLAYERS = 1;
-    public ArrayList<Integer> round = new ArrayList<>();
+    public ArrayList<Integer> round;
 
     public WarGame() {
        this(DEFAULT_NUMBER_OF_PLAYERS);
@@ -21,6 +21,7 @@ public class WarGame extends CardGame<StandardDeck, WarPlayer> {
             players.add(new WarPlayer());
         }
         deal();
+        this.round = new ArrayList<>();
     }
 
     protected void deal() {
@@ -41,8 +42,7 @@ public class WarGame extends CardGame<StandardDeck, WarPlayer> {
         for (WarPlayer p : players) {
             round.add(p.getPlayValue());
         }
-        Collections.sort(round);
-        System.out.println(round.get(0));
+        Collections.sort(round, Collections.reverseOrder());
         return round.get(0);
     }
 }
