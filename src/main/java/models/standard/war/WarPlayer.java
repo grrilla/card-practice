@@ -11,6 +11,7 @@ public class WarPlayer extends Player<StandardPlayingCard, WarHand> {
     }
 
     private int playValue;
+    StandardPlayingCard currentCard;
     private static final int ACE_VALUE = 14;
 
     public int getPlayValue() {
@@ -21,14 +22,14 @@ public class WarPlayer extends Player<StandardPlayingCard, WarHand> {
         hand.addCard(deck.draw());
     }
 
-    public StandardPlayingCard play() {
+    public void play() {
         StandardPlayingCard playedCard = hand.getCards().pop();
-        updateHandValuation(playedCard.getRank());
-        return playedCard;
+        updatePlayValuation(playedCard.getRank());
+        currentCard = playedCard;
     }
 
-    private void updateHandValuation(StandardPlayingCard.StandardRank rank) {
+    private void updatePlayValuation(StandardPlayingCard.StandardRank rank) {
         int value = rank.getValue();
-        playValue += value;
+        playValue = value;
     }
 }

@@ -3,9 +3,13 @@ package models.standard.war;
 import models.CardGame;
 import models.standard.StandardDeck;
 
+import java.util.ArrayList;
+import java.util.Collections;
+
 public class WarGame extends CardGame<StandardDeck, WarPlayer> {
 
     public static final int DEFAULT_NUMBER_OF_PLAYERS = 1;
+    public ArrayList<Integer> round = new ArrayList<>();
 
     public WarGame() {
        this(DEFAULT_NUMBER_OF_PLAYERS);
@@ -31,5 +35,14 @@ public class WarGame extends CardGame<StandardDeck, WarPlayer> {
     public static int evaluatePlay(WarPlayer player) {
         int playValue = player.getPlayValue();
         return playValue;
+    }
+
+    public int evaluateRound() {
+        for (WarPlayer p : players) {
+            round.add(p.getPlayValue());
+        }
+        Collections.sort(round);
+        System.out.println(round.get(0));
+        return round.get(0);
     }
 }

@@ -76,4 +76,16 @@ public class WarGameTest {
         int dealerPeekedValue = dealerPeeked.getRank().getValue();
         assertEquals(dealerPeekedValue, evaluatePlay(dealer));
     }
+
+    @Test
+    public void testEvaluationFavoursHighestValuationInRound() {
+        WarGame game = new WarGame();
+        List<WarPlayer> players = game.getPlayers();
+        WarPlayer dealer = game.getDealer();
+        for (WarPlayer p : players) {
+            p.play();
+        }
+        dealer.play();
+        assertNotNull(game.evaluateRound());
+    }
 }
