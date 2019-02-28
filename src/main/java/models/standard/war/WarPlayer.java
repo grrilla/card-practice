@@ -11,12 +11,13 @@ public class WarPlayer extends Player<StandardPlayingCard, WarHand> {
     }
 
     private int playValue;
-    StandardPlayingCard currentCard;
+    private StandardPlayingCard currentCard;
     private static final int ACE_VALUE = 14;
 
     public int getPlayValue() {
         return playValue;
     }
+    public StandardPlayingCard getCurrentCard() { return currentCard; }
 
     public void draw(Deck<StandardPlayingCard> deck) {
         hand.addCard(deck.draw());

@@ -43,6 +43,9 @@ public class WarGame extends CardGame<StandardDeck, WarPlayer> {
             round.add(p.getPlayValue());
         }
         Collections.sort(round, Collections.reverseOrder());
+        if (round.get(0) == round.get(1)) {
+            System.out.println("WAR!!!");
+        }
         return round.get(0);
     }
 }
