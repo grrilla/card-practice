@@ -3,8 +3,9 @@ package models.tarot;
 import models.Hand;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class TarotSpread extends Hand<TarotCard, ArrayList<TarotCard>> {
+public class TarotSpread extends Hand<TarotCard, List<TarotCard>> {
 
   private static final int PAST_POSITION = 0;
   private static final int PRESENT_POSITION = 1;
@@ -14,7 +15,7 @@ public class TarotSpread extends Hand<TarotCard, ArrayList<TarotCard>> {
 
   public TarotSpread() {
     super();
-    hand = new ArrayList<>();
+    cards = new ArrayList<>();
   }
 
   public static int getNumberOfCardsInSpread() {
@@ -22,22 +23,22 @@ public class TarotSpread extends Hand<TarotCard, ArrayList<TarotCard>> {
   }
 
   public TarotCard getPast() {
-    return hand.get(PAST_POSITION);
+    return cards.get(PAST_POSITION);
   }
 
   public TarotCard getPresent() {
-    return hand.get(PRESENT_POSITION);
+    return cards.get(PRESENT_POSITION);
   }
 
   public TarotCard getFuture() {
-    return hand.get(FUTURE_POSITION);
+    return cards.get(FUTURE_POSITION);
   }
 
   public TarotCard getOverArching() {
-    return hand.get(OVERARCHING_POSITION);
+    return cards.get(OVERARCHING_POSITION);
   }
 
   public void addCard(TarotCard card) {
-    hand.add(card);
+    cards.add(card);
   }
 }

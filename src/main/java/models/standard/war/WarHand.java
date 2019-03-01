@@ -2,16 +2,14 @@ package models.standard.war;
 
 import models.Hand;
 import models.standard.StandardPlayingCard;
-import models.standard.StandardPlayingCard.*;
 
 import java.util.Stack;
 
 public class WarHand extends Hand<StandardPlayingCard, Stack<StandardPlayingCard>> {
 
-  private Stack<StandardPlayingCard> cards = new Stack<>();
-
-  public Stack<StandardPlayingCard> getCards() {
-    return cards;
+  public WarHand() {
+    super();
+    cards = new Stack<>();
   }
 
   public void addCard(StandardPlayingCard card) {

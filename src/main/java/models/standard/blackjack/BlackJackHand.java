@@ -10,7 +10,7 @@ import java.util.List;
 import static java.lang.Math.min;
 import static models.standard.StandardPlayingCard.StandardRank.ACE;
 
-public class BlackJackHand extends Hand<StandardPlayingCard, ArrayList<StandardPlayingCard>> {
+public class BlackJackHand extends Hand<StandardPlayingCard, List<StandardPlayingCard>> {
 
   private static final int ACE_LOW_VALUE = 1;
   private static final int ACE_HIGH_VALUE = 11;
@@ -19,7 +19,10 @@ public class BlackJackHand extends Hand<StandardPlayingCard, ArrayList<StandardP
   private int lowValue;
   private int highValue;
 
-  private List<StandardPlayingCard> cards = new ArrayList<>();
+  public BlackJackHand() {
+    super();
+    cards = new ArrayList<>();
+  }
 
   public int getLowValue() {
     return lowValue;
@@ -27,10 +30,6 @@ public class BlackJackHand extends Hand<StandardPlayingCard, ArrayList<StandardP
 
   public int getHighValue() {
     return highValue;
-  }
-
-  public List<StandardPlayingCard> getCards() {
-    return cards;
   }
 
   public void addCard(StandardPlayingCard card) {

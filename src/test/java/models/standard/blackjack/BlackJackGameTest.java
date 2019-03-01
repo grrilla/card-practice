@@ -50,7 +50,7 @@ public class BlackJackGameTest {
   public void testBlackJackDealerAndPlayersStartWithUniqueCards() {
     BlackJackGame game = new BlackJackGame();
     Set<StandardPlayingCard> collectiveHands = new HashSet<>();
-    int expectedUniqueCardCount = 0; // since we know each hand has 2 cards, add 2 every time we add to set
+    int expectedUniqueCardCount = 0; // since we know each cards has 2 cards, add 2 every time we add to set
 
     collectiveHands.addAll(game.getDealer().getHand().getCards());
     expectedUniqueCardCount += 2; // equiv. to [ count = count + 2 ]
