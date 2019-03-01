@@ -89,7 +89,7 @@ public class WarGameTest {
         assertEquals(10, game.evaluateRound());
     }
     @Test
-    public void testARoundOfPlayedCardsPrintsOutWARIfThereAreTwoOrMoreOfTheSameHighestValue() {
+    public void testARoundOfPlayedCardsEntersWarIfThereAreTwoOrMoreOfTheSameHighestValue() {
         WarGame game = new WarGame();
         List<WarPlayer> players = game.getPlayers();
         players.clear();
@@ -99,18 +99,16 @@ public class WarGameTest {
         assertEquals(10, game.evaluateRound());
     }
 
+    @Test
+    public void testWinnerOfRoundGetsAllCardsFromRound() {
+        WarGame game = new WarGame();
+        List<WarPlayer> players = game.getPlayers();
+        WarPlayer dealer = game.getDealer();
+        for (WarPlayer p : players) {
+            p.play();
+        }
+        dealer.play();
+        game.evaluateRound();
 
-
-//    @Test
-//    public void testWinnerOfRoundGetsAllCardsFromRound() {
-//        WarGame game = new WarGame();
-//        List<WarPlayer> players = game.getPlayers();
-//        WarPlayer dealer = game.getDealer();
-//        for (WarPlayer p : players) {
-//            p.play();
-//        }
-//        dealer.play();
-//        game.evaluateRound();
-//
-//    }
+    }
 }

@@ -4,6 +4,8 @@ import models.Deck;
 import models.Player;
 import models.standard.StandardPlayingCard;
 
+import java.util.Stack;
+
 public class WarPlayer extends Player<StandardPlayingCard, WarHand> {
 
     public WarPlayer() {
@@ -12,12 +14,13 @@ public class WarPlayer extends Player<StandardPlayingCard, WarHand> {
 
     private int playValue;
     private StandardPlayingCard currentCard;
+    private Stack<StandardPlayingCard> playedCards = new Stack<>();
     private static final int ACE_VALUE = 14;
 
     public int getPlayValue() {
         return playValue;
     }
-    public StandardPlayingCard getCurrentCard() { return currentCard; }
+    public StandardPlayingCard getCurrentCard() { return playedCards.pop(); }
 
     public void draw(Deck<StandardPlayingCard> deck) {
         hand.addCard(deck.draw());
@@ -26,7 +29,7 @@ public class WarPlayer extends Player<StandardPlayingCard, WarHand> {
     public void play() {
         StandardPlayingCard playedCard = hand.getCards().pop();
         updatePlayValuation(playedCard.getRank());
-        currentCard = playedCard;
+        playedCards.add(playedCard);
     }
 
     private void updatePlayValuation(StandardPlayingCard.StandardRank rank) {
