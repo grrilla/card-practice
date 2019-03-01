@@ -2,18 +2,18 @@ package models;
 
 public abstract class Player<C extends PlayingCard, H extends Hand> {
 
-    protected H hand;
+  protected H hand;
 
-    public Player(H hand) {
+  public Player(H hand) {
 
-        this.hand = hand;
-    }
+    this.hand = hand;
+  }
 
-    public H getHand() {
-        return hand;
-    }
+  public H getHand() {
+    return hand;
+  }
 
-    public void draw(Deck<C> deck) {
-        hand.addCard(deck.draw());
-    }
+  public void draw(Deck<C> deck) {
+    hand.addCard(deck.draw());
+  }
 }
