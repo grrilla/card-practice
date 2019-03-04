@@ -30,12 +30,15 @@ public abstract class Deck<T extends PlayingCard> {
       cardsInOrder.add(playingCards.pop());
     }
     int shuffleRange = cardsInOrder.size();
-    int randomIndex;
     while (shuffleRange > 0) {
-      randomIndex = (int) (random() * 1000) % shuffleRange;
-      playingCards.push(cardsInOrder.remove(randomIndex));
+      generateRandomIntInIndexRange(shuffleRange);
+      playingCards.push(cardsInOrder.remove(generateRandomIntInIndexRange(shuffleRange)));
       shuffleRange--;
     }
+  }
+
+  private static int generateRandomIntInIndexRange(int shuffleRange) {
+    return (int) (random() * 1000) % shuffleRange;
   }
 
   public int size() {

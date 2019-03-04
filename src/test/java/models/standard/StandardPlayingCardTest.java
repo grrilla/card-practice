@@ -25,36 +25,36 @@ public class StandardPlayingCardTest {
 
   @Test
   public void testEveryStandardStandardPlayingCardCanBeRepresented() {
-    Stack<StandardPlayingCard> stackOfStandardPlayingPlayingCards = new Stack<>();
+    Stack<StandardPlayingCard> stackOfStandardPlayingCards = new Stack<>();
 
     for (StandardSuit s : StandardSuit.values()) {
       for (StandardRank r : StandardRank.values()) {
-        stackOfStandardPlayingPlayingCards.push(new StandardPlayingCard(r, s));
+        stackOfStandardPlayingCards.push(new StandardPlayingCard(r, s));
       }
     }
 
-    assertEquals(52, stackOfStandardPlayingPlayingCards.size());
+    assertEquals(52, stackOfStandardPlayingCards.size());
 
-    assertAllRanksOfGivenSuitArePresent(stackOfStandardPlayingPlayingCards, SPADES);
-    assertAllRanksOfGivenSuitArePresent(stackOfStandardPlayingPlayingCards, DIAMONDS);
-    assertAllRanksOfGivenSuitArePresent(stackOfStandardPlayingPlayingCards, CLUBS);
-    assertAllRanksOfGivenSuitArePresent(stackOfStandardPlayingPlayingCards, HEARTS);
+    assertAllRanksOfGivenSuitArePresent(stackOfStandardPlayingCards, SPADES);
+    assertAllRanksOfGivenSuitArePresent(stackOfStandardPlayingCards, DIAMONDS);
+    assertAllRanksOfGivenSuitArePresent(stackOfStandardPlayingCards, CLUBS);
+    assertAllRanksOfGivenSuitArePresent(stackOfStandardPlayingCards, HEARTS);
   }
 
-  static void assertAllRanksOfGivenSuitArePresent(Stack<StandardPlayingCard> stackOfStandardPlayingPlayingCards, StandardPlayingCard.StandardSuit suit) {
-    assertTrue(stackOfStandardPlayingPlayingCards.search(new StandardPlayingCard(ACE, suit)) > -1);
-    assertTrue(stackOfStandardPlayingPlayingCards.search(new StandardPlayingCard(TWO, suit)) > -1);
-    assertTrue(stackOfStandardPlayingPlayingCards.search(new StandardPlayingCard(THREE, suit)) > -1);
-    assertTrue(stackOfStandardPlayingPlayingCards.search(new StandardPlayingCard(FOUR, suit)) > -1);
-    assertTrue(stackOfStandardPlayingPlayingCards.search(new StandardPlayingCard(FIVE, suit)) > -1);
-    assertTrue(stackOfStandardPlayingPlayingCards.search(new StandardPlayingCard(SIX, suit)) > -1);
-    assertTrue(stackOfStandardPlayingPlayingCards.search(new StandardPlayingCard(SEVEN, suit)) > -1);
-    assertTrue(stackOfStandardPlayingPlayingCards.search(new StandardPlayingCard(EIGHT, suit)) > -1);
-    assertTrue(stackOfStandardPlayingPlayingCards.search(new StandardPlayingCard(NINE, suit)) > -1);
-    assertTrue(stackOfStandardPlayingPlayingCards.search(new StandardPlayingCard(TEN, suit)) > -1);
-    assertTrue(stackOfStandardPlayingPlayingCards.search(new StandardPlayingCard(JACK, suit)) > -1);
-    assertTrue(stackOfStandardPlayingPlayingCards.search(new StandardPlayingCard(QUEEN, suit)) > -1);
-    assertTrue(stackOfStandardPlayingPlayingCards.search(new StandardPlayingCard(KING, suit)) > -1);
+  static void assertAllRanksOfGivenSuitArePresent(Stack<StandardPlayingCard> stackOfStandardPlayingCards, StandardPlayingCard.StandardSuit suit) {
+    assertTrue(stackOfStandardPlayingCards.search(new StandardPlayingCard(ACE, suit)) > -1);
+    assertTrue(stackOfStandardPlayingCards.search(new StandardPlayingCard(TWO, suit)) > -1);
+    assertTrue(stackOfStandardPlayingCards.search(new StandardPlayingCard(THREE, suit)) > -1);
+    assertTrue(stackOfStandardPlayingCards.search(new StandardPlayingCard(FOUR, suit)) > -1);
+    assertTrue(stackOfStandardPlayingCards.search(new StandardPlayingCard(FIVE, suit)) > -1);
+    assertTrue(stackOfStandardPlayingCards.search(new StandardPlayingCard(SIX, suit)) > -1);
+    assertTrue(stackOfStandardPlayingCards.search(new StandardPlayingCard(SEVEN, suit)) > -1);
+    assertTrue(stackOfStandardPlayingCards.search(new StandardPlayingCard(EIGHT, suit)) > -1);
+    assertTrue(stackOfStandardPlayingCards.search(new StandardPlayingCard(NINE, suit)) > -1);
+    assertTrue(stackOfStandardPlayingCards.search(new StandardPlayingCard(TEN, suit)) > -1);
+    assertTrue(stackOfStandardPlayingCards.search(new StandardPlayingCard(JACK, suit)) > -1);
+    assertTrue(stackOfStandardPlayingCards.search(new StandardPlayingCard(QUEEN, suit)) > -1);
+    assertTrue(stackOfStandardPlayingCards.search(new StandardPlayingCard(KING, suit)) > -1);
   }
 
   @Test

@@ -11,12 +11,4 @@ public class WarHand extends Hand<StandardPlayingCard, Stack<StandardPlayingCard
     super();
     cards = new Stack<>();
   }
-
-  public void addCard(StandardPlayingCard card) {
-    cards.add(card);
-  }
-
-  public int size() {
-    return cards.size();
-  }
 }
