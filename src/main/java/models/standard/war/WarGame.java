@@ -3,50 +3,81 @@ package models.standard.war;
 import models.CardGame;
 import models.standard.StandardDeck;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public class WarGame extends CardGame<StandardDeck, WarPlayer> {
 
-  public static final int DEFAULT_NUMBER_OF_PLAYERS = 1;
-  public ArrayList<Integer> round;
+  public static final int DEFAULT_NUMBER_OF_PLAYERS = 2;
 
   public WarGame() {
     this(DEFAULT_NUMBER_OF_PLAYERS);
   }
 
   public WarGame(int numberOfPlayers) {
-    super(new StandardDeck(), new WarPlayer());
+    super(new StandardDeck(), null);
     for (int i = 0; i < numberOfPlayers; i++) {
       players.add(new WarPlayer());
     }
+    dealer = players.get(players.size() - 1);
     deal();
-    this.round = new ArrayList<>();
   }
 
   protected void deal() {
-    while (deck.size() > 1) {
-      dealer.draw(deck);
-      for (WarPlayer p : players) {
-        p.draw(deck);
+    int playerCount = players.size();
+    int deckSize = deck.size();
+    for (int i = 0; i < deckSize; i++) {
+      players.get(i % playerCount).draw(deck);
+    }
+  }
+
+  public void playRound() {
+    for (WarPlayer p : players) {
+      p.play();
+    }
+    WarPlayer winner = resolveWars();
+    resolveRound(winner);
+  }
+
+  private WarPlayer resolveWars() {
+    Set<WarPlayer> warriors = populateWarriors(new HashSet<>(players));
+    while (warriors.size() > 1) {
+      for (WarPlayer w : warriors) {
+        for (int i = 0; i < 4; i++) {
+          w.play();
+        }
+      }
+      warriors = populateWarriors(warriors);
+    }
+    return warriors.iterator().next();
+  }
+
+  private Set<WarPlayer> populateWarriors(Set<WarPlayer> warriors) {
+    WarPlayer winner = getRoundWinner();
+    Set<WarPlayer> newWarriors = new HashSet<>();
+    newWarriors.add(winner);
+    for (WarPlayer p : warriors) {
+      if (p.getPlayedCards().peek().compareTo(winner.getPlayedCards().peek()) == 0) {
+        newWarriors.add(p);
       }
     }
+    return newWarriors;
   }
 
-  public static int evaluatePlay(WarPlayer player) {
-    int playValue = player.getPlayValue();
-    return playValue;
-  }
-
-  public int evaluateRound() {
+  protected WarPlayer getRoundWinner() {
+    WarPlayer roundWinner = dealer;
     for (WarPlayer p : players) {
-      round.add(p.getPlayValue());
+      if (p.getPlayedCards().peek().compareTo(roundWinner.getPlayedCards().peek()) > 0) {
+        roundWinner = p;
+      }
     }
-    round.add(dealer.getPlayValue());
-    Collections.sort(round, Collections.reverseOrder());
-    if (round.get(0) == round.get(1)) {
-      System.out.println("WAR!!!");
+    return roundWinner;
+  }
+
+  private void resolveRound(WarPlayer winner) {
+    for (WarPlayer p : players) {
+      winner.getCardsWon().addAll(p.getPlayedCards());
+      p.getPlayedCards().clear();
     }
-    return round.get(0);
   }
 }
