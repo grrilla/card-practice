@@ -2,7 +2,7 @@ package models;
 
 public abstract class Player<C extends PlayingCard, H extends Hand> {
 
-  protected H hand;
+  public H hand;
 
   public Player(H hand) {
     this.hand = hand;

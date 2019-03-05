@@ -9,6 +9,10 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static models.standard.StandardPlayingCard.StandardRank.ACE;
+import static models.standard.StandardPlayingCard.StandardRank.TEN;
+import static models.standard.StandardPlayingCard.StandardSuit.HEARTS;
+import static models.standard.StandardPlayingCard.StandardSuit.SPADES;
 import static models.standard.war.WarGame.evaluatePlay;
 import static org.junit.Assert.*;
 
@@ -101,16 +105,20 @@ public class WarGameTest {
     assertEquals(10, game.evaluateRound());
   }
 
-//  @Test
-//  public void testWinnerOfRoundGetsAllCardsFromRound() {
-//    WarGame game = new WarGame();
-//    List<WarPlayer> players = game.getPlayers();
-//    WarPlayer dealer = game.getDealer();
-//    for (WarPlayer p : players) {
-//      p.play();
-//    }
-//    dealer.play();
-//    game.evaluateRound();
-//
-//  }
+  @Test
+  public void testWinnerOfRoundGetsAllCardsFromRound() {
+    WarGame game = new WarGame(1);
+    List<WarPlayer> players = game.getPlayers();
+    WarPlayer dealer = game.getDealer();
+    for (WarPlayer p : players) {
+      p.getHand().getCards().clear();
+      p.getHand().addCard(new StandardPlayingCard(TEN, HEARTS));
+      p.play();
+    }
+    dealer.getHand().getCards().clear();
+    dealer.getHand().addCard(new StandardPlayingCard(ACE, SPADES));
+    dealer.play();
+    System.out.println(players);
+    game.evaluateRound();
+  }
 }
