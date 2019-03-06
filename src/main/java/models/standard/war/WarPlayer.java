@@ -4,15 +4,13 @@ import models.Deck;
 import models.Player;
 import models.standard.StandardPlayingCard;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Stack;
 
 public class WarPlayer extends Player<StandardPlayingCard, WarHand> {
 
   private static final int ACE_VALUE = 14;
 
-  private List<StandardPlayingCard> cardsWon =  new ArrayList<>();
+  private Stack<StandardPlayingCard> cardsWon =  new Stack<>();
   private Stack<StandardPlayingCard> playedCards = new Stack<>();
 
   public WarPlayer() {
@@ -31,11 +29,11 @@ public class WarPlayer extends Player<StandardPlayingCard, WarHand> {
     playedCards.push(hand.getCards().pop());
   }
 
-  public List<StandardPlayingCard> getCardsWon() {
+  public Stack<StandardPlayingCard> getCardsWon() {
     return cardsWon;
   }
 
-  public void setCardsWon(List<StandardPlayingCard> cardsWon) {
+  public void setCardsWon(Stack<StandardPlayingCard> cardsWon) {
     this.cardsWon = cardsWon;
   }
 

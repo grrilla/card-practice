@@ -25,16 +25,21 @@ public abstract class Deck<T extends PlayingCard> {
   }
 
   public void shuffle() {
+    shuffle(playingCards);
+  }
+
+  public static <T extends PlayingCard> Stack<T> shuffle(Stack<T> cardStack) {
     ArrayList<T> cardsInOrder = new ArrayList<>();
-    while (!playingCards.empty()) {
-      cardsInOrder.add(playingCards.pop());
+    while (!cardStack.empty()) {
+      cardsInOrder.add(cardStack.pop());
     }
     int shuffleRange = cardsInOrder.size();
     while (shuffleRange > 0) {
       generateRandomIntInIndexRange(shuffleRange);
-      playingCards.push(cardsInOrder.remove(generateRandomIntInIndexRange(shuffleRange)));
+      cardStack.push(cardsInOrder.remove(generateRandomIntInIndexRange(shuffleRange)));
       shuffleRange--;
     }
+    return cardStack;
   }
 
   private static int generateRandomIntInIndexRange(int shuffleRange) {

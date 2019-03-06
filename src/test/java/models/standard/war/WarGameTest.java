@@ -1,7 +1,6 @@
 package models.standard.war;
 
 import models.Deck;
-import models.standard.StandardDeck;
 import models.standard.StandardPlayingCard;
 import org.junit.Test;
 
@@ -38,7 +37,6 @@ public class WarGameTest {
   public void testWarGameHasStandardDeck() {
     Deck deck = new WarGame().getDeck();
     assertNotNull(deck);
-    assertTrue(deck instanceof StandardDeck);
   }
 
   @Test
@@ -217,14 +215,115 @@ public class WarGameTest {
     dealerHand.addCard(new StandardPlayingCard(SEVEN, DIAMONDS));
     dealerHand.addCard(new StandardPlayingCard(ACE, CLUBS));
 
+    assertEquals(9, dealer.getHand().size());
+    assertEquals(0, dealer.getCardsWon().size());
+    assertEquals(9, warPlayer.getHand().size());
+    assertEquals(0, warPlayer.getCardsWon().size());
+
+
     game.playRound();
     assertEquals(0, dealer.getCardsWon().size());
     assertEquals(18, warPlayer.getCardsWon().size());
   }
 
-  // TODO: refill empty hands from cards won between rounds
+  @Test
+  public void testExhaustedHandsReplenishFromCardsWon() {
+    WarGame game = new WarGame();
+    List<WarPlayer> players = game.getPlayers();
+    WarPlayer warPlayer = players.get(0);
+    WarPlayer dealer = game.getDealer();
 
-  // TODO: eliminating players between rounds
+    assertNotEquals(warPlayer, dealer);
+    assertEquals(players.get(1), dealer);
 
+    WarHand warPlayerHand = warPlayer.getHand();
+    warPlayerHand.getCards().clear();
+    warPlayerHand.addCard(new StandardPlayingCard(EIGHT, SPADES));
+    warPlayerHand.addCard(new StandardPlayingCard(ACE, HEARTS));
+    warPlayerHand.addCard(new StandardPlayingCard(ACE, DIAMONDS));
+    warPlayerHand.addCard(new StandardPlayingCard(TEN, CLUBS));
+    warPlayerHand.addCard(new StandardPlayingCard(TEN, HEARTS));
+    warPlayerHand.addCard(new StandardPlayingCard(EIGHT, HEARTS));
+    warPlayerHand.addCard(new StandardPlayingCard(EIGHT, CLUBS));
+    warPlayerHand.addCard(new StandardPlayingCard(EIGHT, DIAMONDS));
+    warPlayerHand.addCard(new StandardPlayingCard(ACE, SPADES));
 
+    WarHand dealerHand = dealer.getHand();
+    dealerHand.addCard(new StandardPlayingCard(SEVEN, CLUBS));
+    dealerHand.addCard(new StandardPlayingCard(TEN, DIAMONDS));
+    dealerHand.addCard(new StandardPlayingCard(NINE, SPADES));
+    dealerHand.addCard(new StandardPlayingCard(NINE, DIAMONDS));
+    dealerHand.addCard(new StandardPlayingCard(TEN, SPADES));
+    dealerHand.addCard(new StandardPlayingCard(NINE, CLUBS));
+    dealerHand.addCard(new StandardPlayingCard(NINE, HEARTS));
+    dealerHand.addCard(new StandardPlayingCard(SEVEN, DIAMONDS));
+    dealerHand.addCard(new StandardPlayingCard(ACE, CLUBS));
+
+    assertEquals(35, dealer.getHand().size());
+    assertEquals(0, dealer.getCardsWon().size());
+    assertEquals(9, warPlayer.getHand().size());
+    assertEquals(0, warPlayer.getCardsWon().size());
+
+    game.playRound();
+    assertEquals(26, dealer.getHand().size());
+    assertEquals(0, dealer.getCardsWon().size());
+    assertEquals(0, warPlayer.getHand().size());
+    assertEquals(18, warPlayer.getCardsWon().size());
+
+    game.cleanup();
+    assertEquals(26, dealer.getHand().size());
+    assertEquals(0, dealer.getCardsWon().size());
+    assertEquals(18, warPlayer.getHand().size());
+    assertEquals(0, warPlayer.getCardsWon().size());
+  }
+
+  @Test
+  public void testPlayersWithExhaustedHandsAndNoCardsWonAreRemovedFromGame() {
+    WarGame game = new WarGame();
+    List<WarPlayer> players = game.getPlayers();
+    WarPlayer warPlayer = players.get(0);
+    WarPlayer dealer = game.getDealer();
+
+    assertNotEquals(warPlayer, dealer);
+    assertEquals(players.get(1), dealer);
+
+    WarHand warPlayerHand = warPlayer.getHand();
+    warPlayerHand.getCards().clear();
+    warPlayerHand.addCard(new StandardPlayingCard(EIGHT, SPADES));
+    warPlayerHand.addCard(new StandardPlayingCard(ACE, HEARTS));
+    warPlayerHand.addCard(new StandardPlayingCard(ACE, DIAMONDS));
+    warPlayerHand.addCard(new StandardPlayingCard(TEN, CLUBS));
+    warPlayerHand.addCard(new StandardPlayingCard(TEN, HEARTS));
+    warPlayerHand.addCard(new StandardPlayingCard(EIGHT, HEARTS));
+    warPlayerHand.addCard(new StandardPlayingCard(EIGHT, CLUBS));
+    warPlayerHand.addCard(new StandardPlayingCard(EIGHT, DIAMONDS));
+    warPlayerHand.addCard(new StandardPlayingCard(ACE, SPADES));
+
+    WarHand dealerHand = dealer.getHand();
+    dealerHand.getCards().clear();
+    dealerHand.addCard(new StandardPlayingCard(SEVEN, CLUBS));
+    dealerHand.addCard(new StandardPlayingCard(TEN, DIAMONDS));
+    dealerHand.addCard(new StandardPlayingCard(NINE, SPADES));
+    dealerHand.addCard(new StandardPlayingCard(NINE, DIAMONDS));
+    dealerHand.addCard(new StandardPlayingCard(TEN, SPADES));
+    dealerHand.addCard(new StandardPlayingCard(NINE, CLUBS));
+    dealerHand.addCard(new StandardPlayingCard(NINE, HEARTS));
+    dealerHand.addCard(new StandardPlayingCard(SEVEN, DIAMONDS));
+    dealerHand.addCard(new StandardPlayingCard(ACE, CLUBS));
+
+    assertEquals(9, dealer.getHand().size());
+    assertEquals(0, dealer.getCardsWon().size());
+    assertEquals(9, warPlayer.getHand().size());
+    assertEquals(0, warPlayer.getCardsWon().size());
+
+    game.playRound();
+    assertEquals(0, dealer.getHand().size());
+    assertEquals(0, dealer.getCardsWon().size());
+    assertEquals(0, warPlayer.getHand().size());
+    assertEquals(18, warPlayer.getCardsWon().size());
+
+    game.cleanup();
+    assertEquals(1, players.size());
+    assertEquals(warPlayer, players.get(0));
+  }
 }

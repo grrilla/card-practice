@@ -10,11 +10,19 @@ public abstract class Hand<C extends PlayingCard, T extends Collection<C>> {
     return cards;
   }
 
+  public void setCards(T cards) {
+    this.cards = cards;
+  }
+
   public void addCard(C card) {
     cards.add(card);
   }
 
   public int size() {
     return cards.size();
+  }
+
+  public boolean isEmpty() {
+    return cards.isEmpty();
   }
 }
