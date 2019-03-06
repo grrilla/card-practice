@@ -41,7 +41,7 @@ public class StandardPlayingCardTest {
     assertAllRanksOfGivenSuitArePresent(stackOfStandardPlayingCards, HEARTS);
   }
 
-  static void assertAllRanksOfGivenSuitArePresent(Stack<StandardPlayingCard> stackOfStandardPlayingCards, StandardPlayingCard.StandardSuit suit) {
+  public static void assertAllRanksOfGivenSuitArePresent(Stack<StandardPlayingCard> stackOfStandardPlayingCards, StandardPlayingCard.StandardSuit suit) {
     assertTrue(stackOfStandardPlayingCards.search(new StandardPlayingCard(ACE, suit)) > -1);
     assertTrue(stackOfStandardPlayingCards.search(new StandardPlayingCard(TWO, suit)) > -1);
     assertTrue(stackOfStandardPlayingCards.search(new StandardPlayingCard(THREE, suit)) > -1);
