@@ -21,7 +21,7 @@ public class WarGame extends CardGame<StandardDeck, WarPlayer> {
   public WarGame(int numberOfPlayers) {
     super(new StandardDeck(), null);
     for (int i = 0; i < numberOfPlayers; i++) {
-      players.add(new WarPlayer());
+      players.add(new WarPlayer(i - 1));
     }
     dealer = players.get(players.size() - 1);
     deal();
@@ -68,7 +68,7 @@ public class WarGame extends CardGame<StandardDeck, WarPlayer> {
     return newWarriors;
   }
 
-  protected WarPlayer getRoundWinner() {
+  public WarPlayer getRoundWinner() {
     WarPlayer roundWinner = dealer;
     for (WarPlayer p : players) {
       if (p.getPlayedCards().peek().compareTo(roundWinner.getPlayedCards().peek()) > 0) {
@@ -81,7 +81,6 @@ public class WarGame extends CardGame<StandardDeck, WarPlayer> {
   private void resolveRound(WarPlayer winner) {
     for (WarPlayer p : players) {
       winner.getCardsWon().addAll(p.getPlayedCards());
-      p.getPlayedCards().clear();
     }
   }
 
@@ -89,6 +88,7 @@ public class WarGame extends CardGame<StandardDeck, WarPlayer> {
     Stack<StandardPlayingCard> swap;
     Set<WarPlayer> losers = new HashSet<>();
     for (WarPlayer p : players) {
+      p.getPlayedCards().clear();
       if (p.getHand().isEmpty()) {
         if (p.getCardsWon().empty()) {
           losers.add(p);

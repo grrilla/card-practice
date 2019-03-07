@@ -13,13 +13,13 @@ public class WarPlayer extends Player<StandardPlayingCard, WarHand> {
   private Stack<StandardPlayingCard> cardsWon =  new Stack<>();
   private Stack<StandardPlayingCard> playedCards = new Stack<>();
 
-  public WarPlayer() {
-    super(new WarHand());
+  public WarPlayer(int playerName) {
+    super(new WarHand(), playerName);
   }
 
-  public StandardPlayingCard getCurrentCard() {
-    return playedCards.pop();
-  }
+//  public StandardPlayingCard getCurrentCard() {
+//    return playedCards.pop();
+//  }
 
   public void draw(Deck<StandardPlayingCard> deck) {
     hand.addCard(deck.draw());
@@ -41,7 +41,9 @@ public class WarPlayer extends Player<StandardPlayingCard, WarHand> {
     return playedCards;
   }
 
-  public void setPlayedCards(Stack<StandardPlayingCard> playedCards) {
-    this.playedCards = playedCards;
-  }
+
+//  public void setPlayedCards(Stack<StandardPlayingCard> playedCards) {
+//    this.playedCards = playedCards;
+//  }
+
 }
