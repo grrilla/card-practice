@@ -6,6 +6,8 @@ import models.standard.StandardPlayingCard;
 
 import java.util.Stack;
 
+import static models.Deck.shuffle;
+
 public class WarPlayer extends Player<StandardPlayingCard, WarHand> {
 
   private static final int ACE_VALUE = 14;
@@ -13,19 +15,22 @@ public class WarPlayer extends Player<StandardPlayingCard, WarHand> {
   private Stack<StandardPlayingCard> cardsWon =  new Stack<>();
   private Stack<StandardPlayingCard> playedCards = new Stack<>();
 
-  public WarPlayer(int playerName) {
-    super(new WarHand(), playerName);
+  public WarPlayer() {
+    super(new WarHand());
   }
-
-//  public StandardPlayingCard getCurrentCard() {
-//    return playedCards.pop();
-//  }
 
   public void draw(Deck<StandardPlayingCard> deck) {
     hand.addCard(deck.draw());
   }
 
-  public void play() {
+  public void play() throws Exception {
+    if (hand.isEmpty()) {
+      if (cardsWon.size() > 0) {
+        replenishHandFromCardsWon();
+      } else {
+        throw new Exception("A player has no cards available and cannot continue.");
+      }
+    }
     playedCards.push(hand.getCards().pop());
   }
 
@@ -41,9 +46,10 @@ public class WarPlayer extends Player<StandardPlayingCard, WarHand> {
     return playedCards;
   }
 
-
-//  public void setPlayedCards(Stack<StandardPlayingCard> playedCards) {
-//    this.playedCards = playedCards;
-//  }
-
+  public void replenishHandFromCardsWon() {
+    Stack<StandardPlayingCard> swap;
+    swap = hand.getCards();
+    hand.setCards(shuffle(cardsWon));
+    cardsWon = swap;
+  }
 }

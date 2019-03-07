@@ -2,13 +2,9 @@ package models.standard.war;
 
 import models.CardGame;
 import models.standard.StandardDeck;
-import models.standard.StandardPlayingCard;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Stack;
-
-import static models.Deck.shuffle;
 
 public class WarGame extends CardGame<StandardDeck, WarPlayer> {
 
@@ -21,7 +17,7 @@ public class WarGame extends CardGame<StandardDeck, WarPlayer> {
   public WarGame(int numberOfPlayers) {
     super(new StandardDeck(), null);
     for (int i = 0; i < numberOfPlayers; i++) {
-      players.add(new WarPlayer(i - 1));
+      players.add(new WarPlayer());
     }
     dealer = players.get(players.size() - 1);
     deal();
@@ -35,7 +31,7 @@ public class WarGame extends CardGame<StandardDeck, WarPlayer> {
     }
   }
 
-  public void playRound() {
+  public void playRound() throws Exception {
     for (WarPlayer p : players) {
       p.play();
     }
@@ -43,9 +39,10 @@ public class WarGame extends CardGame<StandardDeck, WarPlayer> {
     resolveRound(winner);
   }
 
-  private WarPlayer resolveWars() {
+  private WarPlayer resolveWars() throws Exception {
     Set<WarPlayer> warriors = filterToWarCandidates(new HashSet<>(players)); // initially, take the full set of players and see if anyone's involved in a war
     while (warriors.size() > 1) {
+      System.out.println("WAR!");
       for (WarPlayer w : warriors) {
         for (int i = 0; i < 4; i++) {
           w.play();
@@ -81,24 +78,27 @@ public class WarGame extends CardGame<StandardDeck, WarPlayer> {
   private void resolveRound(WarPlayer winner) {
     for (WarPlayer p : players) {
       winner.getCardsWon().addAll(p.getPlayedCards());
+      p.getPlayedCards().clear();
     }
   }
 
   public void cleanup() {
-    Stack<StandardPlayingCard> swap;
     Set<WarPlayer> losers = new HashSet<>();
     for (WarPlayer p : players) {
-      p.getPlayedCards().clear();
       if (p.getHand().isEmpty()) {
         if (p.getCardsWon().empty()) {
           losers.add(p);
         } else {
-          swap = p.getHand().getCards();
-          p.getHand().setCards(shuffle(p.getCardsWon()));
-          p.setCardsWon(swap);
+          p.replenishHandFromCardsWon();
         }
       }
     }
+    for (int i = 1; i <= players.size(); i++) {
+      System.out.println("Player " + i + " now has " + players.get(i - 1).getHand().size() + " cards in hand, " + players.get(i - 1).getPlayedCards().size() + " in play, and " + players.get(i - 1)
+          .getCardsWon()
+          .size() + " in reserve.");
+    }
+    System.out.println();
     players.removeAll(losers);
   }
 }

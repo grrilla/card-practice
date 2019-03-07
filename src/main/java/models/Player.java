@@ -5,9 +5,8 @@ public abstract class Player<C extends PlayingCard, H extends Hand> {
   protected H hand;
   protected int playerName;
 
-  public Player(H hand, int playerName) {
+  public Player(H hand) {
     this.hand = hand;
-    this.playerName = playerName;
   }
 
   public H getHand() {

@@ -61,7 +61,7 @@ public class WarGameTest {
   }
 
   @Test
-  public void testWarPlayerCanPlayOneCardOnTurn() {
+  public void testWarPlayerCanPlayOneCardOnTurn() throws Exception {
     WarGame game = new WarGame();
     List<WarPlayer> players = game.getPlayers();
     assertEquals(2, players.size());
@@ -75,7 +75,7 @@ public class WarGameTest {
   }
 
   @Test
-  public void testARoundOfPlayedCardsIsTheValueOfOneCardFromTheTopOfEachPlayersHand() {
+  public void testARoundOfPlayedCardsIsTheValueOfOneCardFromTheTopOfEachPlayersHand() throws Exception {
     WarGame game = new WarGame();
     List<WarPlayer> players = game.getPlayers();
     WarPlayer dealer = game.getDealer();
@@ -88,7 +88,7 @@ public class WarGameTest {
   }
 
   @Test
-  public void testARoundOfPlayedCardsCanBeEvaluatedByReturningPlayerWithHighestValueCard() {
+  public void testARoundOfPlayedCardsCanBeEvaluatedByReturningPlayerWithHighestValueCard() throws Exception {
     WarGame game = new WarGame();
     List<WarPlayer> players = game.getPlayers();
     WarPlayer warPlayer = players.get(0);
@@ -111,7 +111,7 @@ public class WarGameTest {
   }
 
   @Test
-  public void testWinnerOfRoundGetsAllCardsFromRound() {
+  public void testWinnerOfRoundGetsAllCardsFromRound() throws Exception {
     WarGame game = new WarGame();
     List<WarPlayer> players = game.getPlayers();
     WarPlayer warPlayer = players.get(0);
@@ -134,7 +134,7 @@ public class WarGameTest {
   }
 
   @Test
-  public void testPlayersHaveNoPlayedCardsAfterRoundResolves() {
+  public void testPlayersHaveNoPlayedCardsAfterRoundResolves() throws Exception {
     WarGame game = new WarGame();
     List<WarPlayer> players = game.getPlayers();
     WarPlayer warPlayer = players.get(0);
@@ -157,7 +157,7 @@ public class WarGameTest {
   }
 
   @Test
-  public void testRoundsCanBePlayedAndResolvedWithoutBreakingDeckContinuity() {
+  public void testRoundsCanBePlayedAndResolvedWithoutBreakingDeckContinuity() throws Exception {
     WarGame game = new WarGame();
     for (int i = 0; i < 5; i++) {
       game.playRound();
@@ -182,7 +182,7 @@ public class WarGameTest {
   }
 
   @Test
-  public void testWinnerOfRoundWithTieResolvedByWars() {
+  public void testWinnerOfRoundWithTieResolvedByWars() throws Exception {
     WarGame game = new WarGame();
     List<WarPlayer> players = game.getPlayers();
     WarPlayer warPlayer = players.get(0);
@@ -227,7 +227,7 @@ public class WarGameTest {
   }
 
   @Test
-  public void testExhaustedHandsReplenishFromCardsWon() {
+  public void testExhaustedHandsReplenishFromCardsWon() throws Exception {
     WarGame game = new WarGame();
     List<WarPlayer> players = game.getPlayers();
     WarPlayer warPlayer = players.get(0);
@@ -278,7 +278,7 @@ public class WarGameTest {
   }
 
   @Test
-  public void testPlayersWithExhaustedHandsAndNoCardsWonAreRemovedFromGame() {
+  public void testPlayersWithExhaustedHandsAndNoCardsWonAreRemovedFromGame() throws Exception {
     WarGame game = new WarGame();
     List<WarPlayer> players = game.getPlayers();
     WarPlayer warPlayer = players.get(0);
@@ -325,5 +325,53 @@ public class WarGameTest {
     game.cleanup();
     assertEquals(1, players.size());
     assertEquals(warPlayer, players.get(0));
+  }
+
+  @Test
+  public void testPlayersExhaustedOfAllCardsHaveWarPlayedByNextPlayer() throws Exception {
+    WarGame game = new WarGame();
+    List<WarPlayer> players = game.getPlayers();
+    WarPlayer warPlayer = players.get(0);
+    WarPlayer dealer = game.getDealer();
+
+    assertNotEquals(warPlayer, dealer);
+    assertEquals(players.get(1), dealer);
+
+    WarHand warPlayerHand = warPlayer.getHand();
+    Stack<StandardPlayingCard> warPlayerCardsWon = warPlayer.getCardsWon();
+    warPlayerHand.getCards().clear();
+    warPlayerCardsWon.add(new StandardPlayingCard(ACE, DIAMONDS));
+    warPlayerHand.addCard(new StandardPlayingCard(TEN, CLUBS));
+    warPlayerHand.addCard(new StandardPlayingCard(TEN, HEARTS));
+    warPlayerHand.addCard(new StandardPlayingCard(EIGHT, HEARTS));
+    warPlayerHand.addCard(new StandardPlayingCard(EIGHT, CLUBS));
+    warPlayerHand.addCard(new StandardPlayingCard(EIGHT, DIAMONDS));
+    warPlayerHand.addCard(new StandardPlayingCard(ACE, SPADES));
+
+    WarHand dealerHand = dealer.getHand();
+    Stack<StandardPlayingCard> dealerCardsWon = dealer.getCardsWon();
+    dealerHand.getCards().clear();
+    dealerCardsWon.add(new StandardPlayingCard(EIGHT, SPADES));
+    dealerCardsWon.add(new StandardPlayingCard(ACE, HEARTS));
+    dealerHand.addCard(new StandardPlayingCard(SEVEN, CLUBS));
+    dealerHand.addCard(new StandardPlayingCard(TEN, DIAMONDS));
+    dealerHand.addCard(new StandardPlayingCard(NINE, SPADES));
+    dealerHand.addCard(new StandardPlayingCard(NINE, DIAMONDS));
+    dealerHand.addCard(new StandardPlayingCard(TEN, SPADES));
+    dealerHand.addCard(new StandardPlayingCard(NINE, CLUBS));
+    dealerHand.addCard(new StandardPlayingCard(NINE, HEARTS));
+    dealerHand.addCard(new StandardPlayingCard(SEVEN, DIAMONDS));
+    dealerHand.addCard(new StandardPlayingCard(ACE, CLUBS));
+
+    assertEquals(6, warPlayer.getHand().size());
+    assertEquals(1, warPlayer.getCardsWon().size());
+    assertEquals(9, dealer.getHand().size());
+    assertEquals(2, dealer.getCardsWon().size());
+
+    game.playRound();
+    assertEquals(0, dealer.getHand().size());
+    assertEquals(0, dealer.getCardsWon().size());
+    assertEquals(0, warPlayer.getHand().size());
+    assertEquals(18, warPlayer.getCardsWon().size());
   }
 }
