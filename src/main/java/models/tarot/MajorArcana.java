@@ -50,3 +50,4 @@ public enum MajorArcana implements Suit {
     return meaning;
   }
 }
+

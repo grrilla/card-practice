@@ -1,19 +1,17 @@
 package models;
 
-import models.standard.blackjack.Player;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class CardGame<T extends Deck> {
+public abstract class CardGame<T extends Deck, P extends Player> {
 
   protected T deck;
-  protected Player dealer;
-  protected List<Player> players;
+  protected P dealer;
+  protected List<P> players;
 
-  public CardGame(T deck) {
+  public CardGame(T deck, P dealer) {
     this.deck = deck;
-    this.dealer = new Player();
+    this.dealer = dealer;
     this.players = new ArrayList<>();
     deck.shuffle();
   }
@@ -22,11 +20,11 @@ public abstract class CardGame<T extends Deck> {
     return deck;
   }
 
-  public Player getDealer() {
+  public P getDealer() {
     return dealer;
   }
 
-  public List<Player> getPlayers() {
+  public List<P> getPlayers() {
     return players;
   }
 

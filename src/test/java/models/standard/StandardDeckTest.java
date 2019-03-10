@@ -5,15 +5,9 @@ import org.junit.Test;
 import java.util.HashSet;
 import java.util.Stack;
 
-import static models.standard.StandardPlayingCard.StandardSuit.CLUBS;
-import static models.standard.StandardPlayingCard.StandardSuit.DIAMONDS;
-import static models.standard.StandardPlayingCard.StandardSuit.HEARTS;
-import static models.standard.StandardPlayingCard.StandardSuit.SPADES;
+import static models.standard.StandardPlayingCard.StandardSuit.*;
 import static models.standard.StandardPlayingCardTest.assertAllRanksOfGivenSuitArePresent;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 public class StandardDeckTest {
 

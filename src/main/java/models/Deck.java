@@ -10,6 +10,10 @@ public abstract class Deck<T extends PlayingCard> {
 
   private Stack<T> playingCards = new Stack<>();
 
+  public T draw() {
+    return playingCards.pop();
+  }
+
   protected Deck() {
     init();
   }
@@ -20,22 +24,30 @@ public abstract class Deck<T extends PlayingCard> {
     return playingCards;
   }
 
-  public T draw() {
-    return playingCards.pop();
+  public void shuffle() {
+    shuffle(playingCards);
   }
 
-  public void shuffle() {
+  public static <T extends PlayingCard> Stack<T> shuffle(Stack<T> cardStack) {
     ArrayList<T> cardsInOrder = new ArrayList<>();
-    while (!playingCards.empty()) {
-      cardsInOrder.add(playingCards.pop());
+    while (!cardStack.empty()) {
+      cardsInOrder.add(cardStack.pop());
     }
     int shuffleRange = cardsInOrder.size();
-    int randomIndex;
     while (shuffleRange > 0) {
-      randomIndex = (int) (random() * 1000) % shuffleRange;
-      playingCards.push(cardsInOrder.remove(randomIndex));
+      generateRandomIntInIndexRange(shuffleRange);
+      cardStack.push(cardsInOrder.remove(generateRandomIntInIndexRange(shuffleRange)));
       shuffleRange--;
     }
+    return cardStack;
+  }
+
+  private static int generateRandomIntInIndexRange(int shuffleRange) {
+    return (int) (random() * 1000) % shuffleRange;
+  }
+
+  public int size() {
+    return playingCards.size();
   }
 
   public boolean equals(Object o) {

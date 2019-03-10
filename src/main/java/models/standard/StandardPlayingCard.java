@@ -4,7 +4,9 @@ import models.PlayingCard;
 import models.Rank;
 import models.Suit;
 
-public class StandardPlayingCard extends PlayingCard<StandardPlayingCard.StandardRank, StandardPlayingCard.StandardSuit> {
+import static java.lang.Integer.compare;
+
+public class StandardPlayingCard extends PlayingCard<StandardPlayingCard.StandardRank, StandardPlayingCard.StandardSuit> implements Comparable<StandardPlayingCard> {
 
   public StandardPlayingCard(StandardRank rank, StandardSuit suit) {
     super(rank, suit);
@@ -18,7 +20,6 @@ public class StandardPlayingCard extends PlayingCard<StandardPlayingCard.Standar
   }
 
   public enum StandardRank implements Rank {
-    ACE(1),
     TWO(2),
     THREE(3),
     FOUR(4),
@@ -30,7 +31,8 @@ public class StandardPlayingCard extends PlayingCard<StandardPlayingCard.Standar
     TEN(10),
     JACK(11),
     QUEEN(12),
-    KING(13);
+    KING(13),
+    ACE(14);
 
     private int value;
 
@@ -41,5 +43,9 @@ public class StandardPlayingCard extends PlayingCard<StandardPlayingCard.Standar
     public int getValue() {
       return value;
     }
+  }
+
+  public int compareTo(StandardPlayingCard card) {
+    return compare(this.getRank().getValue(), card.getRank().getValue());
   }
 }

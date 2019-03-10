@@ -1,5 +1,6 @@
 package models.standard.blackjack;
 
+import models.Hand;
 import models.standard.StandardPlayingCard;
 import models.standard.StandardPlayingCard.StandardRank;
 
@@ -9,7 +10,7 @@ import java.util.List;
 import static java.lang.Math.min;
 import static models.standard.StandardPlayingCard.StandardRank.ACE;
 
-public class Hand {
+public class BlackJackHand extends Hand<StandardPlayingCard, List<StandardPlayingCard>> {
 
   private static final int ACE_LOW_VALUE = 1;
   private static final int ACE_HIGH_VALUE = 11;
@@ -17,7 +18,11 @@ public class Hand {
 
   private int lowValue;
   private int highValue;
-  private List<StandardPlayingCard> cards = new ArrayList<>();
+
+  public BlackJackHand() {
+    super();
+    cards = new ArrayList<>();
+  }
 
   public int getLowValue() {
     return lowValue;
@@ -25,10 +30,6 @@ public class Hand {
 
   public int getHighValue() {
     return highValue;
-  }
-
-  public List<StandardPlayingCard> getCards() {
-    return cards;
   }
 
   public void addCard(StandardPlayingCard card) {
@@ -51,3 +52,4 @@ public class Hand {
     return cards.size();
   }
 }
+

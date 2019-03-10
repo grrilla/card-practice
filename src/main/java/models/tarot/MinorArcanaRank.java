@@ -34,3 +34,4 @@ public enum MinorArcanaRank implements Rank {
     return meaning;
   }
 }
+

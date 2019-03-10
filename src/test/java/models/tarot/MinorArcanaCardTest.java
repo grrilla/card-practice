@@ -4,27 +4,9 @@ import org.junit.Test;
 
 import java.util.Stack;
 
-import static models.tarot.MinorArcanaRank.ACE;
-import static models.tarot.MinorArcanaRank.EIGHT;
-import static models.tarot.MinorArcanaRank.FIVE;
-import static models.tarot.MinorArcanaRank.FOUR;
-import static models.tarot.MinorArcanaRank.KING;
-import static models.tarot.MinorArcanaRank.KNIGHT;
-import static models.tarot.MinorArcanaRank.NINE;
-import static models.tarot.MinorArcanaRank.PAIGE;
-import static models.tarot.MinorArcanaRank.QUEEN;
-import static models.tarot.MinorArcanaRank.SEVEN;
-import static models.tarot.MinorArcanaRank.SIX;
-import static models.tarot.MinorArcanaRank.TEN;
-import static models.tarot.MinorArcanaRank.THREE;
-import static models.tarot.MinorArcanaRank.TWO;
-import static models.tarot.MinorArcanaSuit.CUPS;
-import static models.tarot.MinorArcanaSuit.PENTACLES;
-import static models.tarot.MinorArcanaSuit.SWORDS;
-import static models.tarot.MinorArcanaSuit.WANDS;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
+import static models.tarot.MinorArcanaRank.*;
+import static models.tarot.MinorArcanaSuit.*;
+import static org.junit.Assert.*;
 
 public class MinorArcanaCardTest {
 
@@ -56,7 +38,7 @@ public class MinorArcanaCardTest {
     assertAllRanksOfGivenSuitArePresent(cardStack, WANDS);
     assertAllRanksOfGivenSuitArePresent(cardStack, CUPS);
   }
-  
+
   private static void assertAllRanksOfGivenSuitArePresent(Stack<TarotCard> cardStack, MinorArcanaSuit suit) {
     assertTrue(cardStack.search(new MinorArcanaCard(ACE, suit)) > -1);
     assertTrue(cardStack.search(new MinorArcanaCard(TWO, suit)) > -1);
